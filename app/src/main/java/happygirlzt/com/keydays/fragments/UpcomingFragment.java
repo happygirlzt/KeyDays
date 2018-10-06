@@ -23,8 +23,9 @@ public class UpcomingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_upcoming, container, false);
+        // 加载布局文件
+        View view = inflater.inflate(R.layout.fragment_upcoming, container,false);
+        return view;
     }
 
 }
