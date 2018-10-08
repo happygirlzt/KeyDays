@@ -1,3 +1,5 @@
+* Design
+** Version 0
 KeyDays shows the dates that are important to the user. The app displays dates and countdown days to the user.
 
 - User can *scroll through* past dates and upcoming dates.
@@ -5,4 +7,24 @@ KeyDays shows the dates that are important to the user. The app displays dates a
 - For each movie displayed, user can see the following details:
   + Tile, date, past days(or the days left)
 - User interface imporved through styling nad coloring and using material design elements such as CardView and Navigation Drawer.
-- The app is using Espresson to text the UI interactions.
+- The app is using Espresso to text the UI interactions.
+
+** Version 1
+Date: <2018-10-07 Sun>
+MainActivity has left drawerLayout and on the right of the top has ADD button. The user can also change the layout to grid, verse visa.
+
+Log in /Register Activity
+
+*** Activities
+1. MainActivity
+Cover
+List the recorded events -> Right wrap to delete
+Menu
+Add button -> AddDateActivity
+
+2. LoginActivity
+
+3. AddDateActivity
+
+*** Database
+1. Record the user name, email and password.

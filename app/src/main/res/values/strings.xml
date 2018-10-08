@@ -37,7 +37,12 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+
+    <!-- 这里是MainActivity那里的 -->
+    <string name="contentDescription">The cover of main event</string>
+
+    <!-- Add date activity -->
+    <string name="add_date">Add</string>
+    <string name="date_title">Title</string>
+    <string name="back">Back</string>
 </resources>

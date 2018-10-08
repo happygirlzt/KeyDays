@@ -7,6 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/activity_vertical_margin"
     android:clickable="true"
+    android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground">
 
     <RelativeLayout
@@ -40,6 +41,7 @@
             android:maxLength="190"
             android:text="@string/text_hello"
             android:layout_toRightOf="@+id/tvTitle"
+            android:layout_toEndOf="@id/tvTitle"
 
             />
     </RelativeLayout>
