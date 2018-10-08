@@ -24,7 +24,7 @@
             android:layout_alignParentTop="true"
             android:maxLength="20"
             android:textAppearance="?android:textAppearanceMedium"
-            android:textColor="@android:color/black"
+            android:textColor="#F92"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:text="@string/text_hello"
@@ -40,6 +40,7 @@
             android:textSize="14sp"
             android:maxLength="190"
             android:text="@string/text_hello"
+            android:textColor="#F92"
             android:layout_toRightOf="@+id/tvTitle"
             android:layout_toEndOf="@id/tvTitle"
 

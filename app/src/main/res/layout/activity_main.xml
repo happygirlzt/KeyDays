@@ -12,7 +12,7 @@
 
     <!-- The main page -->
     <include
-        layout="@layout/app_bar_main"
+        layout="@layout/content_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

@@ -8,9 +8,10 @@
     tools:context=".activities.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <FrameLayout
+    <include
+        layout="@layout/tool_bar_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" android:id="@+id/content_frame"/>
+        android:layout_height="wrap_content" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvDates"
