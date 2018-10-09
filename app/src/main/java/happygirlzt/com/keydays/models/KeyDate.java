@@ -1,52 +1,62 @@
 package happygirlzt.com.keydays.models;
 
-import java.util.ArrayList;
-
 /**
  * Created pn 3 Oct 2018 by happygirlzt
  */
-public class KeyDate {
-    private String id;
-    private String title;
-    private int countDown;  // day left
-    private String details;  // details of the date
 
-    public String getId() {
+public class KeyDate {
+    int id;
+    String name;
+    int user_id;
+    int remaining_days;
+    int past_days;
+
+    public KeyDate(int id, String name, int user_id, int remaining_days, int past_days) {
+        this.id = id;
+        this.name = name;
+        this.user_id = user_id;
+        this.remaining_days = remaining_days;
+        this.past_days = past_days;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getCountDown() {
-        return countDown;
+    public int getUser_id() {
+        return user_id;
     }
 
-
-
-    public KeyDate(String id, String title, int countDown, String details) {
-        this.id = id;
-        this.title = title;
-        this.countDown = countDown;
-        this.details = details;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
-    public static ArrayList<KeyDate> createDatesList(int n) {
-        ArrayList<KeyDate> keydates = new ArrayList<>();
-
-        for (int i = 1; i <= n; i++) {
-            keydates.add(new KeyDate("Birthday ", "ok", 8, "Anyway"));
-        }
-
-        return keydates;
+    public int getRemaining_days() {
+        return remaining_days;
     }
+
+    public void setRemaining_days(int remaining_days) {
+        this.remaining_days = remaining_days;
+    }
+
+    public int getPast_days() {
+        return past_days;
+    }
+
+    public void setPast_days(int past_days) {
+        this.past_days = past_days;
+    }
+
 }

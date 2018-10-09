@@ -6,7 +6,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import happygirlzt.com.keydays.models.KeyDate;
 import happygirlzt.com.keydays.models.User;
+
+import java.util.Date;
 
 /**
  * Created on 4 Oct 2018 by happygirlzt
@@ -21,29 +25,49 @@ import happygirlzt.com.keydays.models.User;
         private static final int DATABASE_VERSION = 1;
 
         // Database Name
-        private static final String DATABASE_NAME = "usersinfo";
+        private static final String DATABASE_NAME = "userdate.db";
 
-        // User table name
+        // user and date table name
         private static final String TABLE_USER = "user";
+        private static final String TABLE_KEYDATE = "keydate";
 
-        // User Table Columns names
+        // user Table Columns names
         // user_id is primary key
-        private static final String COLUMN_USER_ID = "user_id";
+        private static final String COLUMN_ID = "id";
         private static final String COLUMN_USER_NAME = "user_name";
         private static final String COLUMN_USER_EMAIL = "user_email";
         private static final String COLUMN_USER_PASSWORD = "user_password";
 
-        // create table sql query
+        // date Table Columns names
+        // date_id is primary key
+        private static final String COLUMN_KEYDATE_ID = "keydate_id";
+        private static final String COLUMN_KEYDATE_NAME = "keydate_name";
+        private static final String COLUMN_USER_ID = "user_id";
+        private static final String COLUMN_REMAINING_DAYS = "remaining_days";
+        private static final String COLUMN_PAST_DAYS = "past_days";
+
+        // create table user sql query
         private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER
                 + "("
-                + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COLUMN_USER_NAME + " TEXT,"
                 + COLUMN_USER_EMAIL + " TEXT,"
                 + COLUMN_USER_PASSWORD + " TEXT"
                 + ")";
 
+        // created table date sql query
+        private String CREATE_KEYDATE_TABLE = "CREATE TABLE " + TABLE_DATE
+                + "("
+                + COLUMN_KEYDATE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + COLUMN_KEYDATE_NAME + " TEXT,"
+                + COLUMN_USER_ID + " INTEGER NOT NULL CONSTRAINT user_id REFERENCES user(id) ON DELETE CASCADE,"
+                + COLUMN_REMAINING_DAYS + " INTEGER,"
+                + COLUMN_PAST_DAYS + " INTEGER"
+                + ")";
+
         // drop table sql query
         private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USER;
+        private String DROP_KEYDATE_TABLE = "DROP TABLE IF EXISTS " + TABLE_KEYDATE;
 
         /**
          * Constructor
@@ -56,20 +80,20 @@ import happygirlzt.com.keydays.models.User;
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            // Create table when onCreated() gets called
+            // Create required table when onCreated() gets called
             db.execSQL(CREATE_USER_TABLE);
+            db.execSQL(CREATE_KEYDATE_TABLE);
         }
 
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-            //Drop User Table if exist
+            //Drop user and date Table if exist
             db.execSQL(DROP_USER_TABLE);
+            db.execSQL(DROP_KEYDATE_TABLE);
 
             // Create tables again
             onCreate(db);
-
         }
 
         /**
@@ -77,7 +101,7 @@ import happygirlzt.com.keydays.models.User;
          *
          * @param user
          */
-        public void addUser(User user) {
+        public void createUser(User user) {
             SQLiteDatabase db = this.getWritableDatabase();
 
             // Created content values to insert
@@ -106,8 +130,21 @@ import happygirlzt.com.keydays.models.User;
             values.put(COLUMN_USER_PASSWORD, user.getPassword());
 
             // updating row
-            db.update(TABLE_USER, values, COLUMN_USER_ID + " = ?",
+            db.update(TABLE_USER, values, COLUMN_ID + " = ?",
                     new String[]{String.valueOf(user.getId())});
+            db.close();
+        }
+
+
+        /**
+         * This method to delete a user
+         */
+        public void deleteUser(int user_id) {
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            db.delete(TABLE_USER, COLUMN_ID + " = ?",
+                    new String[] { String.valueOf(user_id) });
+
             db.close();
         }
 
@@ -155,25 +192,20 @@ import happygirlzt.com.keydays.models.User;
         }
 
 
-        public boolean authenticate(User user) {
-            SQLiteDatabase db = this.getReadableDatabase();
-            Cursor cursor = db.query(TABLE_USER,
-                    new String[]{COLUMN_USER_ID, COLUMN_USER_NAME, COLUMN_USER_EMAIL, COLUMN_USER_PASSWORD},
-                    COLUMN_USER_EMAIL + "=?",
-                    new String[]{user.getEmail()},
-                    null,
-                    null,
-                    null);
+        /**
+         * This method is to create a date
+         */
+        public long createKeyDate(KeyDate keyDate) {
+            SQLiteDatabase db = this.getWritableDatabase();
 
-            if (cursor != null && cursor.moveToFirst() && cursor.getCount() > 0) {
-                User user1 = new User(cursor.getString(0),
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getString(3));
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_KEYDATE_NAME, KeyDate.getName());
+            values.put(COLUMN_USER_ID, KeyDate.getUser_id());
+            values.put(COLUMN_);
 
-                return user.getPassword().equalsIgnoreCase(user1.getPassword());
-            }
+            // insert row
+            long tag_id = db.insert(TABLE_TAG, null, values);
 
-            return false;
+            return tag_id;
         }
     }

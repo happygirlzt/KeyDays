@@ -39,6 +39,15 @@
         android:layout_marginTop="20dp"
         android:contentDescription="@string/date_title"/>
 
+    <Button
+        android:id="@+id/choose_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_title"
+        android:layout_toRightOf="@+id/exact_date"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:text="@string/add_date"/>
 
 
     <android.support.v7.widget.AppCompatButton

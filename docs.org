@@ -27,4 +27,40 @@ Add button -> AddDateActivity
 3. AddDateActivity
 
 *** Database
-1. Record the user name, email and password.
+1. table1: users. Record the user name, email and password.
+2. table2: keydates. Each user has his own table, which is recorddate.
+
+One-to-many relationship
+
+**** The user table
+primary\_key: user\_id
+
+| id       | user\_name  | user\_email | user\_password |
+|----------+------------+-------------+----------------|
+|          |            |             |                |
+
+#+BEGIN_SRC
+CREATE TABLE user (
+   id    INTEGER PRIMARY KEY AUTOINCREMENT,
+   user_name  TEXT    NOT NULL,
+   user_email TEXT    NOT NULL,
+   user_password TEXT NOT NULL
+);
+#+END_SRC
+
+**** The keydate table
+primary\_key: keydate_id
+foreign key: users(user\_id)
+
+| keydate\_id | keydate\_name | user\_id | remaining\_days | past\_days |
+|-------------+---------------+----------+-----------------+------------|
+|             |               |          |                 |            |
+#+BEGIN_SRC
+CREATE TABLE keydate (
+   keydate_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+   keydate_name TEXT NOT NULL,
+   user_id INTEGER NOT NULL CONSTRAINT user_id REFERENCES user(id) ON DELETE CASCADE,
+   remaining_days INTEGER,
+   past_days INTEGER
+);
+#+END_SRC

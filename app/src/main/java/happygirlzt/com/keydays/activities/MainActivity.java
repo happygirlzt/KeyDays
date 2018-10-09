@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 加载R.layout.activity_main的布局
         setContentView(R.layout.activity_main);
 
         // 初始化工具栏，让toolbar向actionbar一样工作
