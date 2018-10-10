@@ -11,6 +11,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 
@@ -20,11 +21,14 @@ import happygirlzt.com.keydays.databases.DatabaseHelper;
 
 import static android.view.View.*;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 /**
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity {
+    // Tag
+    private static final String TAG = "LoginActivity";
 
     // TextInputLayout
     private final AppCompatActivity activity = LoginActivity.this;
@@ -49,38 +53,45 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate(Bundle) called");
         setContentView(R.layout.activity_login);
 
         databaseHelper = new DatabaseHelper(this);
 
         initViews();
-        appCompatButtonLogin.setOnClickListener(onclick);
-    }
 
-    OnClickListener onclick = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
+        // 对login按钮设置listener
+        appCompatButtonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String Email = textInputEditTextEmail.getText().toString();
+                String Password = textInputEditTextPassword.getText().toString();
 
-            String Email = textInputEditTextEmail.getText().toString();
-            String Password = textInputEditTextPassword.getText().toString();
+                if (isEmailValid(Email) && isPasswordValid(Password)) {
+                    // Authenticate user
+                    boolean currentUserExists = true;
+                            //= databaseHelper.authenticate(new User(0,
+                            //null, Email, Password));
 
-            if (isEmailValid(Email) && isPasswordValid(Password)) {
-                // Authenticate user
-                boolean currentUserExists = databaseHelper.authenticate(new User(null,
-                        null, Email, Password));
+                    // Check if authentication is successful
+                    if (currentUserExists) {
+                        goToMainActivity();
+                        sp.edit().putBoolean("logged",true).apply();
 
-                // Check if authentication is successful
-                if (currentUserExists) {
-                    goToMainActivity();
-                    sp.edit().putBoolean("logged",true).apply();
-
-                    Snackbar.make(appCompatButtonLogin, "Successfully Logged in!", Snackbar.LENGTH_LONG).show();
-                } else {
-                    Snackbar.make(appCompatButtonLogin, "Failed to log in", Snackbar.LENGTH_LONG).show();
+                        // 登录成功
+                        Toast.makeText(LoginActivity.this,
+                                R.string.correct_toast,
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        // 登录失败
+                        Toast.makeText(LoginActivity.this,
+                                R.string.incorrect_toast,
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
-        }
-    };
+        });
+    }
 
     private boolean isEmailValid(String email) {
 
@@ -114,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
             textInputEditTextPassword = findViewById(R.id.editTextPassword);
             textInputLayoutEmail = findViewById(R.id.textInputLayoutEmail);
             textInputLayoutPassword = findViewById(R.id.textInputLayoutPassword);
-            appCompatButtonLogin = findViewById(R.id.email_sign_in_button);
+            appCompatButtonLogin = findViewById(R.id.button_login);
     }
 
     // Keep the user logged in

@@ -9,7 +9,7 @@
     tools:showIn="@layout/app_bar_main">
 
     <include
-        layout="@layout/tool_bar_main"
+        layout="@layout/app_bar_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

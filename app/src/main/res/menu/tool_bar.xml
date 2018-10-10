@@ -8,8 +8,8 @@
         android:title="@string/hello_blank_fragment"
         app:showAsAction="ifRoom"/>
     <!-- Settings, should always be in the overflow -->
-    <item android:id="@+id/action_settings"
+    <item android:id="@+id/action_add"
         android:icon="@drawable/ic_add"
-        android:title="@string/action_settings"
+        android:title="@string/add"
         app:showAsAction="never"/>
 </menu>

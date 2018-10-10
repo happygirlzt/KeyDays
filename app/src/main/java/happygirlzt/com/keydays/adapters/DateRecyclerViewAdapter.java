@@ -44,8 +44,7 @@ public class DateRecyclerViewAdapter extends RecyclerView.Adapter<DateRecyclerVi
         KeyDate dates = keyDates.get(position);
 
         // Set item views based on your views and data model
-        holder.tvTitle.setText(dates.getTitle());
-        holder.tvCountdown.setText(dates.getCountDown());
+
     }
 
     @Override

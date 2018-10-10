@@ -19,26 +19,26 @@
             android:padding="16dp"
             android:background="@drawable/leslie">
             <TextView
+                android:id="@+id/date_details_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="@string/date_title"
                 android:textColor="@color/colorText"
                 android:gravity="center"
                 android:textSize="30sp" />
             <TextView
+                android:id="@+id/date_details_days"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:gravity="center"
-                android:text="@string/prompt_password"
                 android:textColor="@color/colorText"
                 android:textSize="50sp"/>
             <TextView
+                android:id="@+id/date_details_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@color/colorText"
-                android:text="@string/hello_blank_fragment"
                 android:textSize="30sp"/>
         </LinearLayout>
 

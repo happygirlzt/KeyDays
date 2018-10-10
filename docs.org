@@ -64,3 +64,31 @@ CREATE TABLE keydate (
    past_days INTEGER
 );
 #+END_SRC
+
+* 开发笔记
+1. MVC架构
+- Model: models里相关的java文件
+- View: 主要是layout里面的文件
+- Controller: 用来控制view，主要是activies文件夹下的文件，主要是继承自Activity,Fragment和Service的
+
+2. 在activity\_date\_details.xml里，不需要hard-code每个记录的日期的name,remainingdays和date，这个需要在对应的java里setText。因为这个是根据具体日期来变化的。
+
+3. 一般来说，activity的onCreate()有如下4个作用：
+- inflating  widgets and putting them on screen(调用setContentView(int))
+- getting references to inflated widgets
+- setting listeners on widgets to handle user interaction
+- connecting to external model data
+
+要注意，我们每次调用onCreate()时，实际上是override父类的方法
+
+4. 如果不想要actionbar但是activity又继承自AppCompatActivity的话，APP的theme要改成
+#+BEGIN_SRC
+android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+#+END_SRC
+
+5. fragment和activity之间的通信问题：
+
+6. 为了使用自定义的toolbar,需要用noactionbar的主题
+#+BEGIN_SRC
+<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+#+END_SRC

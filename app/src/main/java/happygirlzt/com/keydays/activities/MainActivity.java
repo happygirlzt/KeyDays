@@ -26,7 +26,6 @@ import happygirlzt.com.keydays.models.KeyDate;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ArrayList<KeyDate> keydates;
     private DateRecyclerViewAdapter adapter;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -71,19 +70,18 @@ public class MainActivity extends AppCompatActivity
 
         displayView(R.id.nav_upcoming);
 
-        // Initialize keydates
-        keydates = KeyDate.createDatesList(20);
 
-        RecyclerView mRecyclerView = findViewById(R.id.rvDates);
+
+        // RecyclerView mRecyclerView = findViewById(R.id.rvDates);
         // 设置线性layout
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        // mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         // 添加默认动画
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
-        adapter = new DateRecyclerViewAdapter(keydates);
+        // mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
+        // adapter = new DateRecyclerViewAdapter(keydates);
 
         // 把adapter添加到RecyclerView上
-        mRecyclerView.setAdapter(adapter);
+        // mRecyclerView.setAdapter(adapter);
     }
 
 

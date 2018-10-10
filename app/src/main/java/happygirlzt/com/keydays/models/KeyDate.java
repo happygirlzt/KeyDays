@@ -1,62 +1,74 @@
 package happygirlzt.com.keydays.models;
 
+
+import java.util.Date;
+
 /**
  * Created pn 3 Oct 2018 by happygirlzt
  */
 
 public class KeyDate {
-    int id;
-    String name;
-    int user_id;
-    int remaining_days;
-    int past_days;
+    private int mId;
+    private String mName;
+    private Date mDate;
+    private int mUserId;
+    private int mRemainingDays;
+    private int mPastDays;
 
-    public KeyDate(int id, String name, int user_id, int remaining_days, int past_days) {
-        this.id = id;
-        this.name = name;
-        this.user_id = user_id;
-        this.remaining_days = remaining_days;
-        this.past_days = past_days;
+    public KeyDate(int mId, String mName, Date mDate, int mUserId, int mRemainingDays, int mPastDays) {
+        this.mId = mId;
+        this.mName = mName;
+        this.mDate = mDate;
+        this.mUserId = mUserId;
+        this.mRemainingDays = mRemainingDays;
+        this.mPastDays = mPastDays;
     }
 
-    public int getId() {
-        return id;
+    public int getmId() {
+        return mId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setmId(int mId) {
+        this.mId = mId;
     }
 
-    public String getName() {
-        return name;
+    public String getmName() {
+        return mName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setmName(String mName) {
+        this.mName = mName;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public Date getmDate() {
+        return mDate;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setmDate(Date mDate) {
+        this.mDate = mDate;
     }
 
-    public int getRemaining_days() {
-        return remaining_days;
+    public int getmUserId() {
+        return mUserId;
     }
 
-    public void setRemaining_days(int remaining_days) {
-        this.remaining_days = remaining_days;
+    public void setmUserId(int mUserId) {
+        this.mUserId = mUserId;
     }
 
-    public int getPast_days() {
-        return past_days;
+    public int getmRemainingDays() {
+        return mRemainingDays;
     }
 
-    public void setPast_days(int past_days) {
-        this.past_days = past_days;
+    public void setmRemainingDays(int mRemainingDays) {
+        this.mRemainingDays = mRemainingDays;
     }
 
+    public int getmPastDays() {
+        return mPastDays;
+    }
+
+    public void setmPastDays(int mPastDays) {
+        this.mPastDays = mPastDays;
+    }
 }

@@ -42,6 +42,7 @@ import java.util.Date;
         // date_id is primary key
         private static final String COLUMN_KEYDATE_ID = "keydate_id";
         private static final String COLUMN_KEYDATE_NAME = "keydate_name";
+        private static final String COLUMN_KEYDAYE_DATE = "keydate_date";
         private static final String COLUMN_USER_ID = "user_id";
         private static final String COLUMN_REMAINING_DAYS = "remaining_days";
         private static final String COLUMN_PAST_DAYS = "past_days";
@@ -56,10 +57,11 @@ import java.util.Date;
                 + ")";
 
         // created table date sql query
-        private String CREATE_KEYDATE_TABLE = "CREATE TABLE " + TABLE_DATE
+        private String CREATE_KEYDATE_TABLE = "CREATE TABLE " + TABLE_KEYDATE
                 + "("
                 + COLUMN_KEYDATE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COLUMN_KEYDATE_NAME + " TEXT,"
+                + COLUMN_KEYDAYE_DATE + " TEXT,"
                 + COLUMN_USER_ID + " INTEGER NOT NULL CONSTRAINT user_id REFERENCES user(id) ON DELETE CASCADE,"
                 + COLUMN_REMAINING_DAYS + " INTEGER,"
                 + COLUMN_PAST_DAYS + " INTEGER"
@@ -199,13 +201,14 @@ import java.util.Date;
             SQLiteDatabase db = this.getWritableDatabase();
 
             ContentValues values = new ContentValues();
-            values.put(COLUMN_KEYDATE_NAME, KeyDate.getName());
-            values.put(COLUMN_USER_ID, KeyDate.getUser_id());
-            values.put(COLUMN_);
+            //values.put(COLUMN_KEYDAYE_DATE, keyDate.getmDate());
+            values.put(COLUMN_KEYDATE_NAME, keyDate.getmName());
+            values.put(COLUMN_USER_ID, keyDate.getmId());
+
 
             // insert row
-            long tag_id = db.insert(TABLE_TAG, null, values);
+            long keydate_id = db.insert(TABLE_KEYDATE, null, values);
 
-            return tag_id;
+            return keydate_id;
         }
     }
