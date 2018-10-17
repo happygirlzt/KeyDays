@@ -92,3 +92,110 @@ android:theme="@style/Theme.AppCompat.Light.NoActionBar"
 #+BEGIN_SRC
 <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
 #+END_SRC
+
+7. login and register with database
+
+8. selectionArgs
+在用sqlite查询的时候，准确地说是，用cursor进行query的时候，函数是
+#+BEGIN_SRC
+public Cursor query(String table,
+                    String[] columns,
+                    String selection,
+                    String[] selectionArgs,
+                    String groupBy,
+                    String having,
+                    String orderBy);
+#+END_SRC
+
+columns就是要返回的列
+selection，就是where后面的过滤条件
+selectionArgs，是如果selection种有string的时候，用来转义的，在selection中需要嵌入字符串的地方用?代替
+举个例子：
+#+BEGIN_SRC
+public void doQuery(long id, final String name) {
+   db.query("TABLE_NAME",
+            null,
+            "id=" + id + "AND name=?",
+            new String[] {name},
+            null,
+            null,
+            null
+   );
+}
+#+END_SRC
+
+9. 关于Date的处理
+因为sqlite里面没有getDate()这个method，所以在定义date模型的时候，要把时间设置为Long
+
+10. button的onClickListener()的三种处理办法
+- 在activity对应的xml文件中设置onclick对应的事件名
+ 比如在xml文件中给button设置了add方法
+#+BEGIN_SRC
+android:onClick="add"
+#+END_SRC
+ 再去对应的java文件中，实现add函数即可
+#+BEGIN_SRC
+public void add(View view) {
+
+}
+#+END_SRC
+
+- 直接在对应的activity中为对应的button设置绑定函数
+#+BEGIN_SRC
+protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.main);
+
+  findViewById(R.id.Button).setOnClickListener(new OnClickListener(){
+    @Override
+    public void onClick(View v) {
+      Intent intent = new Intent(mainActivity.this, fristActivity.class);
+      intent.putExtra("data", "mainActivity");
+      startActivity(intent);
+    }
+  });
+}
+#+END_SRC
+
+这个的问题是，如果同一个activity中有多个button，代码会看上去很乱
+
+- 最后一种适用于一个页面有多个button
+实现setOnClickListener()这个接口
+#+BEGIN_SRC
+public class mainActivity extends Activity implements OnClickListener{
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.main);
+    findViewById(R.id.Button).setOnClickListener(this);
+    findViewById(R.id.Button1).setOnClickListener(this);
+  }
+
+  public void onClick(View view) {
+    switch (v.getId()) {
+      case R.id.Button:
+        ...
+        break;
+
+      case R.id.Button1:
+        ...
+        break;
+      default:
+        break;
+    }
+  }
+}
+#+END_SRC
+
+11. 对于每个widget,layout\_width都是必须的！！！即使用了layout\_weight，也需要设置width！！！
+
+12. List events
+List views respond to the following events
+- setOnItemClickListener(AdapterView.OnItemClickListener)
+- setOnItemLongClickListener(AdapterView.OnItemLongClickListener)
+- setOnItemSelectedListener(AdapterView.OnItemSelectedListener)
+onDrag
+onFocusChanged
+onHover
+onKey
+onScroll
+onTouch

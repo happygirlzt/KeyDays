@@ -10,14 +10,16 @@ import android.database.sqlite.SQLiteOpenHelper;
 import happygirlzt.com.keydays.models.KeyDate;
 import happygirlzt.com.keydays.models.User;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
- * Created on 4 Oct 2018 by happygirlzt
- * Fun1: addUser()
- * Fun2: alreadyExists()
- * Fun3: anthenticate()
- */
+     * Created on 4 Oct 2018 by happygirlzt
+     * Fun1: createUser()
+     * Fun2: deleteUser()
+     * Fun3: checkUser()
+     */
 
     public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -107,6 +109,7 @@ import java.util.Date;
             SQLiteDatabase db = this.getWritableDatabase();
 
             // Created content values to insert
+            // contentValues很像map
             ContentValues values = new ContentValues();
             values.put(COLUMN_USER_NAME, user.getName());
             values.put(COLUMN_USER_EMAIL, user.getEmail());
@@ -159,24 +162,19 @@ import java.util.Date;
          */
         public boolean checkUser(String email) {
 
-            // array of columns to fetch
+            // 需要返回的columns
             String[] columns = {
                     COLUMN_USER_ID
             };
             SQLiteDatabase db = this.getReadableDatabase();
 
-            // selection criteria
+            // selection
             String selection = COLUMN_USER_EMAIL + " = ?";
 
             // selection argument
             String[] selectionArgs = {email};
 
-            // query user table with condition
-            /**
-             * Here query function is used to fetch records from user table this function works like we use sql query.
-             * SQL query equivalent to this query function is
-             * SELECT user_id FROM user WHERE user_email = 'jack@androidtutorialshub.com';
-             */
+
             Cursor cursor = db.query(TABLE_USER, //Table to query
                     columns,                    //columns to return
                     selection,                  //columns for the WHERE clause
@@ -193,22 +191,105 @@ import java.util.Date;
 
         }
 
+        /**
+         * This method to check user exist or not
+         *
+         * @param email
+         * @param password
+         * @return true/false
+         */
+        public boolean checkUser(String email, String password) {
+
+            // array of columns to fetch
+            String[] columns = {
+                    COLUMN_USER_ID
+            };
+            SQLiteDatabase db = this.getReadableDatabase();
+            // selection criteria
+            String selection = COLUMN_USER_EMAIL + " = ?" + " AND " + COLUMN_USER_PASSWORD + " = ?";
+
+            // selection arguments
+            String[] selectionArgs = {email, password};
+
+            // query user table with conditions
+            Cursor cursor = db.query(TABLE_USER,
+                    columns,
+                    selection,
+                    selectionArgs,
+                    null,
+                    null,
+                    null);
+
+            int cursorCount = cursor.getCount();
+
+            cursor.close();
+            db.close();
+
+            return cursorCount > 0;
+        }
 
         /**
          * This method is to create a date
          */
-        public long createKeyDate(KeyDate keyDate) {
+        public void createKeyDate(KeyDate keyDate) {
             SQLiteDatabase db = this.getWritableDatabase();
 
             ContentValues values = new ContentValues();
             //values.put(COLUMN_KEYDAYE_DATE, keyDate.getmDate());
+
             values.put(COLUMN_KEYDATE_NAME, keyDate.getmName());
-            values.put(COLUMN_USER_ID, keyDate.getmId());
+            values.put(COLUMN_USER_ID, keyDate.getmUserId());
+            // values.put(COLUMN_KEYDAYE_DATE, keyDate.getmDate());
+            values.put(COLUMN_PAST_DAYS, keyDate.getmPastDays());
+            values.put(COLUMN_REMAINING_DAYS, keyDate.getmRemainingDays());
 
-
-            // insert row
-            long keydate_id = db.insert(TABLE_KEYDATE, null, values);
-
-            return keydate_id;
+            db.insertOrThrow(TABLE_KEYDATE, null, values);
+            db.close();
         }
+
+        /**
+         * This method is to delete a date
+         */
+         public void deleteKeyDate(int keyday_id) {
+             SQLiteDatabase db = this.getWritableDatabase();
+
+             db.delete(TABLE_KEYDATE, COLUMN_ID + " = ?",
+                     new String[] { String.valueOf(keyday_id) });
+
+             db.close();
+         }
+
+         /**
+          *  This method is to fetch the dates created by user_id
+          */
+         public List<KeyDate> fetchUserDates(int user_id) {
+             SQLiteDatabase db = this.getReadableDatabase();
+             List<KeyDate> res = new ArrayList<>();
+             KeyDate mKeyDate = null;
+
+             String section = "COLUMN_USER_ID=";
+             // Select * from KeyDates where user_id = 'user_id'
+             Cursor c = db.query(TABLE_KEYDATE,
+                     null,  // null means return all columns
+                     section + user_id,
+                     null,
+                     null,
+                     null,
+                     null);
+
+             while (c.moveToNext()) {
+                 mKeyDate = new KeyDate();
+                 mKeyDate.setmId(c.getInt(c.getColumnIndex("COLUMN_KEYDATE_ID")));
+                // mKeyDate.setmDate(c.getString(c.getColumnIndex("COLUMN_KEYDATE_DATE")));
+                 mKeyDate.setmName(c.getString(c.getColumnIndex("COLUMN_KEYDATE_NAME")));
+                 mKeyDate.setmPastDays(c.getInt(c.getColumnIndex("COLUMN_KEYDATE_PAST_DAYS")));
+                 mKeyDate.setmRemainingDays(c.getInt(c.getColumnIndex("COLUMN_KEYDATE_REMAINING_DAYS")));
+                 res.add(mKeyDate);
+             }
+
+             c.close();
+             db.close();
+             return res;
+         }
+
     }

@@ -12,10 +12,16 @@
 
     <!-- The main page -->
     <include
-        layout="@layout/content_main"
+        layout="@layout/app_bar_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <ListView
+        android:id="@+id/word_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
     <!-- Left nav -->
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

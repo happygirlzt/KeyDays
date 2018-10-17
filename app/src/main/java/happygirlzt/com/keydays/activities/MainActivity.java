@@ -1,35 +1,76 @@
 package happygirlzt.com.keydays.activities;
 
-import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import happygirlzt.com.keydays.R;
-import happygirlzt.com.keydays.adapters.DateRecyclerViewAdapter;
-
+import happygirlzt.com.keydays.databases.DatabaseHelper;
 import happygirlzt.com.keydays.models.KeyDate;
+
+// import happygirlzt.com.keydays.adapters.DateRecyclerViewAdapter;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private DateRecyclerViewAdapter adapter;
+    // private DateRecyclerViewAdapter adapter;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Toolbar toolbar;
+    private FloatingActionButton fab;
+    private RecyclerView recyclerView;
+    private List<KeyDate> keyDateList;
+    private DatabaseHelper databaseHelper;
+
+    Context context = MainActivity.this;
+
+    // list of countries
+    private static final String[] WORDS = {
+            "Afghanistan",
+            "Albania",
+            "Algeria",
+            "Andorra",
+            "Angola",
+            "Argentina",
+            "Armenia",
+            "Australia",
+            "Austria",
+            "Azerbaijan",
+            "Bahamas",
+            "Bahrain",
+            "Bangladesh",
+            "Barbados",
+            "Belarus",
+            "Belgium",
+            "Belize",
+            "Benin",
+            "Bhutan",
+            "Bolivia",
+            "Bosnia Herzegovina",
+            "Botswana",
+            "Brazil",
+            "Brunei",
+            "Bulgaria",
+            "Burkina",
+            "Burundi",
+            "Cambodia",
+            "Cameroon"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +78,12 @@ public class MainActivity extends AppCompatActivity
         // 加载R.layout.activity_main的布局
         setContentView(R.layout.activity_main);
 
-        // 初始化工具栏，让toolbar向actionbar一样工作
+        // 初始化工具栏，让t向actionbar一样工作
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("DrawerLayout测试");
         setSupportActionBar(toolbar);
 
-        // 初始化抽屉样式
+        recyclerView = findViewById(R.id.rvDates);
         drawerLayout = findViewById(R.id.drawer_layout);
-        // 初始化navigation
         navigationView = findViewById(R.id.nav_view);
 
         // 绑定drawerLayout 和 navigationView
@@ -53,35 +92,37 @@ public class MainActivity extends AppCompatActivity
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        // 菜单栏的点击监听
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
+        /*fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.nav_past_days:
-
-                        break;
-                        default:
-                            break;
-                }
-                return true;
+            public void onClick(View view) {
+                startActivity(new Intent(AddDateActivity.this, AddDateActivity.class));
             }
-        });
+        });*/
 
-        displayView(R.id.nav_upcoming);
+        /*keyDateList = new ArrayList<>();
+        adapter = new DateRecyclerViewAdapter(keyDateList, this);
 
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapter);
+        databaseHelper = new DatabaseHelper(activity);*/
 
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < WORDS.length; i++) {
+            list.add(WORDS[i]);
+        }
 
-        // RecyclerView mRecyclerView = findViewById(R.id.rvDates);
-        // 设置线性layout
-        // mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        // have to make a adapter
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                R.layout.item_date,
+                list);
 
-        // 添加默认动画
-        // mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
-        // adapter = new DateRecyclerViewAdapter(keydates);
-
-        // 把adapter添加到RecyclerView上
-        // mRecyclerView.setAdapter(adapter);
+        ListView listView = findViewById(R.id.word_list);
+        listView.setAdapter(adapter);
     }
 
 
@@ -95,11 +136,10 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    // inflate the toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // 把tool_bar当成菜单栏
-        getMenuInflater().inflate(R.menu.tool_bar, menu);
+
+        getMenuInflater().inflate(R.menu.activity_main_drawer, menu);
         return true;
     }
 

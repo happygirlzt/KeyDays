@@ -10,12 +10,16 @@ import java.util.Date;
 public class KeyDate {
     private int mId;
     private String mName;
-    private Date mDate;
+    private Long mDate;
     private int mUserId;
     private int mRemainingDays;
     private int mPastDays;
 
-    public KeyDate(int mId, String mName, Date mDate, int mUserId, int mRemainingDays, int mPastDays) {
+    public KeyDate() {
+
+    }
+
+    public KeyDate(int mId, String mName, Long mDate, int mUserId, int mRemainingDays, int mPastDays) {
         this.mId = mId;
         this.mName = mName;
         this.mDate = mDate;
@@ -40,11 +44,11 @@ public class KeyDate {
         this.mName = mName;
     }
 
-    public Date getmDate() {
+    public Long getmDate() {
         return mDate;
     }
 
-    public void setmDate(Date mDate) {
+    public void setmDate(Long mDate) {
         this.mDate = mDate;
     }
 

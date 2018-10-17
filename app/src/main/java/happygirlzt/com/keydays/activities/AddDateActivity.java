@@ -6,10 +6,12 @@ import android.app.DialogFragment;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.Button;
 import android.util.Log;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,21 +21,37 @@ import java.util.Date;
 import java.util.Locale;
 
 import happygirlzt.com.keydays.R;
+import happygirlzt.com.keydays.models.KeyDate;
 
 public class AddDateActivity extends AppCompatActivity {
 
     // Tag
     private static final String TAG = "LoginActivity";
 
-    Button mButton;
+    private Button mButton;  // pick date
+    private AppCompatButton mCompatButton;  // add
+
+    private KeyDate k;
+    private EditText et_title;
+    private TextView detail_days, detail_prompt;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        // This method is used to initialize
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate(Bundle) called");
         setContentView(R.layout.activity_add_date);
 
+        // initialize
         mButton = findViewById(R.id.choose_date);
+        mCompatButton = findViewById(R.id.add_date);
+
+        et_title = findViewById(R.id.et_title);
+        detail_days = findViewById(R.id.detail_days);
+        detail_prompt = findViewById(R.id.detail_prompt);
+
+        Date now = new Date();
+
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,9 +62,17 @@ public class AddDateActivity extends AppCompatActivity {
                 // 第一个参数为FragmentManager对象
                 // 第二个为调用该方法的fragment的标签
                 datePickerFragment.show(getFragmentManager(), "date picker");
-
             }
         });
+
+
+        mCompatButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+
+            });
     }
 
 

@@ -21,6 +21,7 @@ import happygirlzt.com.keydays.databases.DatabaseHelper;
 
 import static android.view.View.*;
 import android.content.SharedPreferences;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -42,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     // Login Button
     private AppCompatButton appCompatButtonLogin;
 
-    private AppCompatTextView textViewLinkRegister;
+    private TextView textViewLinkRegister;
 
     // DatabaseHelper
     private DatabaseHelper databaseHelper;
@@ -58,7 +59,12 @@ public class LoginActivity extends AppCompatActivity {
 
         databaseHelper = new DatabaseHelper(this);
 
-        initViews();
+        textInputEditTextEmail = findViewById(R.id.editTextEmail);
+        textInputEditTextPassword = findViewById(R.id.editTextPassword);
+        textInputLayoutEmail = findViewById(R.id.textInputLayoutEmail);
+        textInputLayoutPassword = findViewById(R.id.textInputLayoutPassword);
+        appCompatButtonLogin = findViewById(R.id.button_login);
+        textViewLinkRegister = findViewById(R.id.textViewLinkRegister);
 
         // 对login按钮设置listener
         appCompatButtonLogin.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +97,15 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // 对LinkRegister设listener
+        textViewLinkRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent IntentRegister = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(IntentRegister);
+            }
+        });
     }
 
     private boolean isEmailValid(String email) {
@@ -119,14 +134,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    // connet XML views to its objects
-    private void initViews() {
-            textInputEditTextEmail = findViewById(R.id.editTextEmail);
-            textInputEditTextPassword = findViewById(R.id.editTextPassword);
-            textInputLayoutEmail = findViewById(R.id.textInputLayoutEmail);
-            textInputLayoutPassword = findViewById(R.id.textInputLayoutPassword);
-            appCompatButtonLogin = findViewById(R.id.button_login);
-    }
 
     // Keep the user logged in
     public void goToMainActivity() {

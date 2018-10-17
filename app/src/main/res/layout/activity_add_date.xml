@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
 
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -13,64 +13,87 @@
     android:theme="@style/Theme.AppCompat.Light.NoActionBar"
     tools:context=".activities.AddDateActivity">
 
-    <ImageView
-        android:id="@+id/date_title"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/toolbar"
-        android:src="@drawable/ic_date_title"/>
 
-    <EditText
-        android:id="@+id/et_title"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:layout_toRightOf="@id/date_title"
-        android:layout_marginLeft="50dp"
-        android:hint="@string/date_title"
-        />
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/exact_date"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_date"
-        android:layout_below="@+id/date_title"
-        android:layout_marginTop="20dp"
-        android:contentDescription="@string/date_title"/>
+        <ImageView
+            android:id="@+id/date_title"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_date_title_black"/>
 
-    <TextView
-        android:id="@+id/picked_date"
-        android:layout_width="100dp"
-        android:layout_below="@id/et_title"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="50dp"
-        android:textColor="@android:color/black"
-        android:layout_toRightOf="@+id/exact_date"/>
+        <EditText
+            android:id="@+id/et_title"
+            android:lines="1"
+            android:maxLines="1"
+            android:layout_weight="4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/date_title"
+            />
 
-    <Button
-        android:id="@+id/choose_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/et_title"
-        android:gravity="right"
-        android:layout_toRightOf="@+id/picked_date"
-        android:layout_centerInParent="true"
-        android:onClick="showDatePicker"
-        android:layout_marginTop="20dp"
+    </LinearLayout>
 
-        android:text="@string/select_date"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/exact_date"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_date_black"
+            android:layout_marginTop="20dp"
+            android:contentDescription="@string/date_title"/>
+
+        <TextView
+            android:id="@+id/picked_date"
+            android:layout_weight="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:id="@+id/choose_date"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:layout_gravity="end|center_vertical"
+            android:text="@string/select_date" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/detail_prompt"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_size_big"
+            />
+
+        <TextView
+            android:id="@+id/detail_days"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="@dimen/text_size_big"/>
+
+    </LinearLayout>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/add_date"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@id/exact_date"
         android:layout_marginTop="60dp"
-        android:gravity="center"
-        android:layout_centerInParent="true"
+        android:layout_gravity="center"
         android:text="@string/add"
         android:textColor="@color/colorText"
         android:textStyle="bold"
@@ -79,4 +102,4 @@
         android:background="@drawable/button_bg"
         />
 
-</RelativeLayout>
+</LinearLayout>
