@@ -11,6 +11,7 @@ KeyDays shows the dates that are important to the user. The app displays dates a
 
 ** Version 1
 Date: <2018-10-07 Sun>
+
 MainActivity has left drawerLayout and on the right of the top has ADD button. The user can also change the layout to grid, verse visa.
 
 Log in /Register Activity
@@ -33,11 +34,11 @@ Add button -> AddDateActivity
 One-to-many relationship
 
 **** The user table
-primary\_key: user\_id
+primary_key: user_id
 
-| id       | user\_name  | user\_email | user\_password |
-|----------+------------+-------------+----------------|
-|          |            |             |                |
+| id | user_name | user_email | user_password  |
+|----+-----------+------------+----------------|
+|    |           |            |                |
 
 #+BEGIN_SRC
 CREATE TABLE user (
@@ -49,12 +50,12 @@ CREATE TABLE user (
 #+END_SRC
 
 **** The keydate table
-primary\_key: keydate_id
-foreign key: users(user\_id)
+primary_key: keydate_id
+foreign key: users(user_id)
 
-| keydate\_id | keydate\_name | user\_id | remaining\_days | past\_days |
-|-------------+---------------+----------+-----------------+------------|
-|             |               |          |                 |            |
+| keydate_id | keydate_name | user_id | remaining_days | past_days |
+|------------+--------------+---------+----------------+-----------|
+|            |              |         |                |           |
 #+BEGIN_SRC
 CREATE TABLE keydate (
    keydate_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -66,14 +67,16 @@ CREATE TABLE keydate (
 #+END_SRC
 
 * 开发笔记
-1. MVC架构
+** MVC架构
 - Model: models里相关的java文件
 - View: 主要是layout里面的文件
 - Controller: 用来控制view，主要是activies文件夹下的文件，主要是继承自Activity,Fragment和Service的
 
-2. 在activity\_date\_details.xml里，不需要hard-code每个记录的日期的name,remainingdays和date，这个需要在对应的java里setText。因为这个是根据具体日期来变化的。
+** 动态设定textview的值
+在activity_date_details.xml里，不需要hard-code每个记录的日期的name,remainingdays和date，这个需要在对应的java里setText。因为这个是根据具体日期来变化的。
 
-3. 一般来说，activity的onCreate()有如下4个作用：
+** onCreate()函数
+ 一般来说，activity的onCreate()有如下4个作用：
 - inflating  widgets and putting them on screen(调用setContentView(int))
 - getting references to inflated widgets
 - setting listeners on widgets to handle user interaction
@@ -81,21 +84,25 @@ CREATE TABLE keydate (
 
 要注意，我们每次调用onCreate()时，实际上是override父类的方法
 
-4. 如果不想要actionbar但是activity又继承自AppCompatActivity的话，APP的theme要改成
+** actionbar的设置
+如果不想要actionbar但是activity又继承自AppCompatActivity的话，APP的theme要改成
 #+BEGIN_SRC
 android:theme="@style/Theme.AppCompat.Light.NoActionBar"
 #+END_SRC
 
-5. fragment和activity之间的通信问题：
+** fragment/activity通信
+fragment和activity之间的通信问题：
 
-6. 为了使用自定义的toolbar,需要用noactionbar的主题
+** toolbar设置
+为了使用自定义的toolbar,需要用noactionbar的主题
 #+BEGIN_SRC
 <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
 #+END_SRC
 
-7. login and register with database
+** Database
+login and register with database
 
-8. selectionArgs
+** selectionArgs
 在用sqlite查询的时候，准确地说是，用cursor进行query的时候，函数是
 #+BEGIN_SRC
 public Cursor query(String table,
@@ -124,10 +131,10 @@ public void doQuery(long id, final String name) {
 }
 #+END_SRC
 
-9. 关于Date的处理
+** 关于Date的处理
 因为sqlite里面没有getDate()这个method，所以在定义date模型的时候，要把时间设置为Long
 
-10. button的onClickListener()的三种处理办法
+** button的onClickListener()的三种处理办法
 - 在activity对应的xml文件中设置onclick对应的事件名
  比如在xml文件中给button设置了add方法
 #+BEGIN_SRC
@@ -186,16 +193,22 @@ public class mainActivity extends Activity implements OnClickListener{
 }
 #+END_SRC
 
-11. 对于每个widget,layout\_width都是必须的！！！即使用了layout\_weight，也需要设置width！！！
+** layout_width不能少！
+对于每个widget,layout_width都是必须的！！！即使用了layout_weight，也需要设置width！！！
 
-12. List events
+** List events
 List views respond to the following events
 - setOnItemClickListener(AdapterView.OnItemClickListener)
 - setOnItemLongClickListener(AdapterView.OnItemLongClickListener)
 - setOnItemSelectedListener(AdapterView.OnItemSelectedListener)
 onDrag
+
 onFocusChanged
+
 onHover
+
 onKey
+
 onScroll
+
 onTouch
