@@ -1,6 +1,7 @@
 package happygirlzt.com.keydays.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -11,10 +12,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,13 +81,13 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 加载R.layout.activity_main的布局
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.app_bar_main);
 
         // 初始化工具栏，让t向actionbar一样工作
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        recyclerView = findViewById(R.id.rvDates);
+        /*recyclerView = findViewById(R.id.rvDates);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
 
@@ -91,7 +96,7 @@ public class MainActivity extends AppCompatActivity
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-
+*/
 
         /*fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -123,6 +128,20 @@ public class MainActivity extends AppCompatActivity
 
         ListView listView = findViewById(R.id.word_list);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                /*@Override
+                        String definition = WORDS[position * 2 + 1];
+
+                        public void onItemClick(AdapterView<> parent, View view, int position, long id) {
+                    Log.d("list", "the user clicked item " + position);
+
+                    TextView definView = (TextView) findViewById()
+                }*/
+            }
+        });
     }
 
 
@@ -153,5 +172,11 @@ public class MainActivity extends AppCompatActivity
 
     public void displayView(int viewId) {
 
+    }
+
+    public void fabAddDate(View view) {
+        // go to the AddDateActivity
+Intent intent = new Intent(this, AddDateActivity.class);
+startActivity(intent);
     }
 }

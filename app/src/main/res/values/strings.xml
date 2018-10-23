@@ -50,5 +50,6 @@
     <string name="picked_date">Picked Date</string>
     <string name="days">Days</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="options_exit">Exit</string>
 
 </resources>

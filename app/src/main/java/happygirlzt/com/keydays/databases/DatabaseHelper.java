@@ -84,7 +84,6 @@ import java.util.List;
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            // Create required table when onCreated() gets called
             db.execSQL(CREATE_USER_TABLE);
             db.execSQL(CREATE_KEYDATE_TABLE);
         }
@@ -92,20 +91,17 @@ import java.util.List;
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            //Drop user and date Table if exist
             db.execSQL(DROP_USER_TABLE);
             db.execSQL(DROP_KEYDATE_TABLE);
 
-            // Create tables again
             onCreate(db);
         }
 
         /**
-         * This method is to create user record
+         * This method is to add a user record
          *
-         * @param user
          */
-        public void createUser(User user) {
+        public void addUser(User user) {
             SQLiteDatabase db = this.getWritableDatabase();
 
             // Created content values to insert
@@ -115,17 +111,17 @@ import java.util.List;
             values.put(COLUMN_USER_EMAIL, user.getEmail());
             values.put(COLUMN_USER_PASSWORD, user.getPassword());
 
-            // Inserting Row
+            // 插入一行
             db.insert(TABLE_USER, null, values);
             db.close();
         }
 
 
         /**
-         * This method to update user record
+         * 以后可以来实现修改密码
          *
-         * @param user
          */
+/*
         public void updateUser(User user) {
             SQLiteDatabase db = this.getWritableDatabase();
 
@@ -139,41 +135,38 @@ import java.util.List;
                     new String[]{String.valueOf(user.getId())});
             db.close();
         }
+*/
 
 
         /**
-         * This method to delete a user
+         * 暂时不需要
+         *  This method to delete a user
          */
-        public void deleteUser(int user_id) {
+        /*public void deleteUser(int user_id) {
             SQLiteDatabase db = this.getWritableDatabase();
 
             db.delete(TABLE_USER, COLUMN_ID + " = ?",
                     new String[] { String.valueOf(user_id) });
 
             db.close();
-        }
+        }*/
 
 
         /**
          * This method to check user exist or not
          *
-         * @param email
-         * @return true/false
          */
         public boolean checkUser(String email) {
-
             // 需要返回的columns
             String[] columns = {
                     COLUMN_USER_ID
             };
             SQLiteDatabase db = this.getReadableDatabase();
 
-            // selection
             String selection = COLUMN_USER_EMAIL + " = ?";
 
-            // selection argument
+            // 根据email来判断user
             String[] selectionArgs = {email};
-
 
             Cursor cursor = db.query(TABLE_USER, //Table to query
                     columns,                    //columns to return
@@ -192,26 +185,20 @@ import java.util.List;
         }
 
         /**
-         * This method to check user exist or not
+         * This method to check if user name and password match
          *
-         * @param email
-         * @param password
-         * @return true/false
          */
         public boolean checkUser(String email, String password) {
 
-            // array of columns to fetch
             String[] columns = {
                     COLUMN_USER_ID
             };
-            SQLiteDatabase db = this.getReadableDatabase();
-            // selection criteria
-            String selection = COLUMN_USER_EMAIL + " = ?" + " AND " + COLUMN_USER_PASSWORD + " = ?";
 
-            // selection arguments
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            String selection = COLUMN_USER_EMAIL + " = ?" + " AND " + COLUMN_USER_PASSWORD + " = ?";
             String[] selectionArgs = {email, password};
 
-            // query user table with conditions
             Cursor cursor = db.query(TABLE_USER,
                     columns,
                     selection,
@@ -229,9 +216,9 @@ import java.util.List;
         }
 
         /**
-         * This method is to create a date
+         * This method is to add a date
          */
-        public void createKeyDate(KeyDate keyDate) {
+        public void addKeyDate(KeyDate keyDate) {
             SQLiteDatabase db = this.getWritableDatabase();
 
             ContentValues values = new ContentValues();
@@ -250,11 +237,11 @@ import java.util.List;
         /**
          * This method is to delete a date
          */
-         public void deleteKeyDate(int keyday_id) {
+         public void deleteKeyDate(KeyDate keydate) {
              SQLiteDatabase db = this.getWritableDatabase();
 
              db.delete(TABLE_KEYDATE, COLUMN_ID + " = ?",
-                     new String[] { String.valueOf(keyday_id) });
+                     new String[] { String.valueOf(keydate.getmId())});
 
              db.close();
          }

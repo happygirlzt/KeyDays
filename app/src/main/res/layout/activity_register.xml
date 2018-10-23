@@ -35,39 +35,65 @@
             android:gravity="center_horizontal"/>
 
         <!-- 编辑框 -->
-        <EditText
-            android:id="@+id/editTextEmail"
-            android:hint="@string/prompt_email"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:textColorHint="@color/colorText"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
 
-        <requestFocus />
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:hint="@string/prompt_email"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:textColorHint="@color/colorText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <EditText
-           android:id="@+id/editTextUserName"
-           android:hint="@string/prompt_name"
-           android:layout_width="match_parent"
-           android:textColorHint="@color/colorText"
-           android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/editTextPassword"
-            android:autofillHints="@string/prompt_password"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColorHint="@color/colorText"
-            android:hint="@string/prompt_password"
-            android:inputType="textPassword" />
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/editTextConfirmPassword"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColorHint="@color/colorText"
-            android:hint="@string/confirm_password"
-            android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/editTextUserName"
+                android:hint="@string/prompt_name"
+                android:layout_width="match_parent"
+                android:textColorHint="@color/colorText"
+                android:layout_height="wrap_content" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editTextPassword"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorText"
+                android:hint="@string/prompt_password"
+                android:inputType="textPassword" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editTextConfirmPassword"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorText"
+                android:hint="@string/confirm_password"
+                android:inputType="textPassword" />
+
+        </android.support.design.widget.TextInputLayout>
 
         <Button
             android:background="@drawable/button_bg"
@@ -78,6 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:onClick="createNewAccount"
             android:text="@string/text_register"
              />
 

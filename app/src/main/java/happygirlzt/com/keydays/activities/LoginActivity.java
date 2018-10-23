@@ -1,28 +1,20 @@
 package happygirlzt.com.keydays.activities;
 
-import happygirlzt.com.keydays.models.User;
-
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputLayout;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-
+import android.widget.TextView;
+import android.widget.Toast;
 
 import happygirlzt.com.keydays.R;
 import happygirlzt.com.keydays.databases.DatabaseHelper;
-
-import static android.view.View.*;
-import android.content.SharedPreferences;
-import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * A login screen that offers login via email/password.

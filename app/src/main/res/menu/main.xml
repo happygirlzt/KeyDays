@@ -6,4 +6,10 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/exit_the_app"
+        android:orderInCategory="101"
+        android:title="@string/options_exit"
+        app:showAsAction="ifRoom|withText"/>
 </menu>

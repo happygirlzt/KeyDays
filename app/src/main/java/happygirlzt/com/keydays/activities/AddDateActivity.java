@@ -69,7 +69,8 @@ public class AddDateActivity extends AppCompatActivity {
         mCompatButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    // check 是否所有的信息填写正确了
+finish();  // stops/closes the current activity
                 }
 
             });

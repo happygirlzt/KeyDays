@@ -66,6 +66,30 @@ CREATE TABLE keydate (
 );
 #+END_SRC
 
+** Version 2
+*** Database
+<2018-10-19 Fri 16:33>
+
+重构数据库...
+三张表比较科学
+
+1. user
+这张表用来记录用户信息
+| id | email | first_name | last_name | password |
+|----+-------+------------+-----------+----------|
+|    |       |            |           |          |
+2. keydate
+| id | title | date |
+|----+-------+------|
+|    |       |      |
+这张表用来记录所有的日期
+3. users_keydates
+这张表用来记录哪个用户存了哪个日期
+| user_id | keydate_id |
+|---------+------------|
+|         |            |
+
+注意一点，column name和table name是case-sensitive
 * 开发笔记
 ** MVC架构
 - Model: models里相关的java文件
@@ -102,6 +126,55 @@ fragment和activity之间的通信问题：
 ** Database
 login and register with database
 
+#+BEGIN_SRC
+SQLiteDatabase db = openOrCreateDatabase(
+"name", MODE_PRIVATE, null);
+db.execSQL("SQL query");
+#+END_SRC
+
+两种类型的SQL commands
+- rawQuery  如果需要返回结果的话(e.g. SELECT)
+- execSQL 如果不需要返回结果的话(e.g. INSERT, DELETE, UPDATE)
+*** 常用操作
+#+BEGIN_SRC
+db.delete("table", "whereClause", args);
+db.insert("table", null, values);
+db.update("table", values, "whereClause", args);
+db.execSQL("query");
+db.rawQuery("SQL query", args);
+#+END_SRC
+
+*** Cursor
+Android SQLite API returns an object called a Cursor that allows you to iterate through the results of a SELECT query.
+
+比较像一个指针，位于结果集中的某个位置。
+- 可以forward to next result row
+- ask the cursor for values of columns of its "current" row
+
+看下面这个用法：
+#+BEGIN_SRC
+Cursor cr = db.rawQuery(
+            "SELECT id, email FROM user", null);
+
+if (cr.moveToFirst()) {
+   do {
+      int id = cr.getInt(cr.getColumnIndex("id"));
+      String emial = cr.getString(cr.getColumnIndex("email"));
+      ...
+   } while (cr.moveToNext());
+
+   cr.close();
+}
+#+END_SRC
+
+Cursor methods
+- c.close();
+- c.getColumnIndex("name"); 根据列的名字返回列的index
+- c.getColumnName(index); 根据列的index返回列的名字
+- c.getCount(); 返回结果的行数
+- c.getDouble(index), c.getFloat(index), c.getLong(index) 从列中取数据
+- c.isBeforeFirst(), c.isFirst(), c.isLast()
+- c.moveToFirst(), c.moveToLast(), c.moveToNext(), c.moveToPosition(index), 让cursor移动位置
 ** selectionArgs
 在用sqlite查询的时候，准确地说是，用cursor进行query的时候，函数是
 #+BEGIN_SRC
@@ -212,3 +285,5 @@ onKey
 onScroll
 
 onTouch
+** TextInputLayout、TextInputEditText
+EditText在输入的时候，hint会自动隐藏。而TextInputLayout是LinearLayout的子类，用于辅助显示提示信息。当EditText输入信息的时候，hint会显示在上方。
