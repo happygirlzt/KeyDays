@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".AddDateActivity">
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/general_margin"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_data_title"
+            android:layout_marginStart="@dimen/general_margin"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_date_title"
+            />
+
+        <EditText
+            android:id="@+id/et_title"
+            android:layout_marginEnd="@dimen/general_margin"
+            android:lines="1"
+            android:maxLines="1"
+            android:layout_weight="4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/general_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_pick_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/general_margin"
+            android:src="@drawable/ic_date" />
+
+        <EditText
+            android:id="@+id/et_date"
+            android:layout_marginEnd="@dimen/general_margin"
+            android:lines="1"
+            android:maxLines="1"
+            android:inputType="date"
+            android:layout_weight="4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+             />
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/add_date"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/general_margin"
+        android:layout_marginRight="@dimen/general_margin"
+        android:layout_height="50dp"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center"
+        android:text="@string/add_date"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textAlignment="center"
+
+        />
+</LinearLayout>

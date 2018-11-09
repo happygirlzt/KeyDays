@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "715033013511",
+    "firebase_url": "https://keydays-happygirlzt.firebaseio.com",
+    "project_id": "keydays-happygirlzt",
+    "storage_bucket": "keydays-happygirlzt.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715033013511:android:e55b71d8a7187a91",
+        "android_client_info": {
+          "package_name": "com.happygirlzt.keydays"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "715033013511-btt312su3mkakbrpiao7lm8usg3vhi53.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.happygirlzt.keydays",
+            "certificate_hash": "51cae96c537b0ef8818ca583c5f63bf333d1ac00"
+          }
+        },
+        {
+          "client_id": "715033013511-3cpavhmjqgr765vi6lljb6j1cphsa05v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPSzRm0O_uy11zDpaXiHH5h_1ynSs2DTM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "715033013511-3cpavhmjqgr765vi6lljb6j1cphsa05v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

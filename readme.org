@@ -287,3 +287,15 @@ onScroll
 onTouch
 ** TextInputLayout、TextInputEditText
 EditText在输入的时候，hint会自动隐藏。而TextInputLayout是LinearLayout的子类，用于辅助显示提示信息。当EditText输入信息的时候，hint会显示在上方。
+* Refactor <2018-11-09 Fri>
+Using Firebase
+
+** Essential Parts
+*** Four Activities
+1. The mainActivity
+  - A floating Action button to add new events
+  - Right slip to delete an event
+2. A detail of an event
+3. Add new event
+4. Login/Sign up
+  - Storing in Firebase
