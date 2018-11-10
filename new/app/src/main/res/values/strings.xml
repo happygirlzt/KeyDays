@@ -16,4 +16,6 @@
     <string name="direct_to_register">Not have an account? Now register!</string>
     <string name="or">Or</string>
     <string name="log_out">Log out</string>
+    <string name="title_activity_date_detail">DateDetailActivity</string>
+    <string name="not_logged_msg">You are not logged in!!!</string>
 </resources>

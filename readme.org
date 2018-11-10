@@ -299,3 +299,12 @@ Using Firebase
 3. Add new event
 4. Login/Sign up
   - Storing in Firebase
+。。。。。
+很伤心，搞了半天，不知道为什么添加不了数据到firebase。。。然后晚上才发现。。。原来我一直选的是cloud firestore而不是realtime database。。。。。。。。
+
+Pay attention to using Realtim Database carefully.
+
+** TODO <2018-11-10 Sat>
+1. ListView can present the saved dates
+2. Add new user in database
+3. A user can add new date and delete date

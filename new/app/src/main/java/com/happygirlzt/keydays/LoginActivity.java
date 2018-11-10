@@ -109,6 +109,7 @@ public class LoginActivity extends AppCompatActivity
                                     if (!task.isSuccessful()) {
                                         Toast.makeText(LoginActivity.this, "Wrong email or password", Toast.LENGTH_LONG).show();
                                     } else {
+                                        Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                         startActivity(intent);
                                         finish();

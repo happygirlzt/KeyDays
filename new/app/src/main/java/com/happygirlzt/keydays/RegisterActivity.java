@@ -14,12 +14,20 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
     EditText etEmail, etName, etPassword, etConfirmPassword;
     Button registerButton;
     FirebaseAuth firebaseAuth;
+
+    final static FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,17 +45,17 @@ public class RegisterActivity extends AppCompatActivity {
         if (firebaseAuth.getCurrentUser() != null) {
             Toast.makeText(getApplicationContext(), "You are logged in", Toast.LENGTH_SHORT).show();
 
-            startActivity(new Intent(this, MainActivity.class));
             finish();
+            startActivity(new Intent(this, MainActivity.class));
         }
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = etEmail.getText().toString();
+                final String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
                 String confirmPassword = etConfirmPassword.getText().toString();
-                String name = etName.getText().toString();
+                final String name = etName.getText().toString();
 
                 if (TextUtils.isEmpty(email)){
                     Toast.makeText(getApplicationContext(),"Please enter your email", Toast.LENGTH_SHORT).show();
@@ -70,12 +78,28 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
 
+                // Created user
                 firebaseAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()){
-                                    Toast.makeText(getApplicationContext(), "Successful!", Toast.LENGTH_SHORT).show();
+                                if (task.isSuccessful()) {
+                                    FirebaseUser user = firebaseAuth.getCurrentUser();
+
+                                    // writeNewUser(firebaseAuth.getCurrentUser().getUid(), name, email);
+                                    String key = database.getReference("users").push().getKey();
+
+                                    User u = new User();
+                                    u.setUserid(user.getUid());
+                                    u.setUsername(name);
+                                    u.setUseremail(email);
+
+
+                                    Map<String, Object> childUpdates = new HashMap<>();
+                                    assert key != null;
+                                    childUpdates.put(key, u.toFirebaseObj());
+
+                                    Toast.makeText(getApplicationContext(), "Register successful!", Toast.LENGTH_SHORT).show();
                                     // Registered -> Login
                                     startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
 

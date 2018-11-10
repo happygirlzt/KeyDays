@@ -1,14 +1,13 @@
 package com.happygirlzt.keydays;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -16,15 +15,28 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.TokenData;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddDateActivity extends FragmentActivity {
 
-    static EditText dateEdit;
-    static Button addButton;
-    static EditText titleEdit;
+    private static EditText dateEdit;
+    private static Button addButton;
+    private static EditText titleEdit;
+
+    static String titleStr;
+    static String dateStr;
+
+    final static FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+    static FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +56,8 @@ public class AddDateActivity extends FragmentActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String titleStr = titleEdit.getText().toString();
-                String dateStr = dateEdit.getText().toString();
+                titleStr = titleEdit.getText().toString();
+                dateStr = dateEdit.getText().toString();
 
                 if (TextUtils.isEmpty(titleStr)) {
                     Toast.makeText(AddDateActivity.this, "Please enter the name", Toast.LENGTH_SHORT).show();
@@ -55,8 +67,26 @@ public class AddDateActivity extends FragmentActivity {
                     Toast.makeText(AddDateActivity.this, "Please pick a date", Toast.LENGTH_SHORT).show();
                 }
 
-                // store the date
                 Toast.makeText(AddDateActivity.this, dateStr, Toast.LENGTH_SHORT).show();
+
+                String key = database.getReference("dates").push().getKey();
+                DateItem dateItem = new DateItem();
+                dateItem.setuId(user.getUid());
+                dateItem.setTitle(titleStr);
+                dateItem.setmDate(dateStr);
+
+                Map<String, Object> childUpdates = new HashMap<>();
+                childUpdates.put(key, dateItem.toFirebaseObj());
+
+                database.getReference("dates").updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        if (databaseError == null) {
+                            finish();
+                        }
+                    }
+                });
+
                 startActivity(new Intent(AddDateActivity.this, RegisterActivity.class));
             }
         });
@@ -84,7 +114,11 @@ public class AddDateActivity extends FragmentActivity {
 
         @SuppressLint("DefaultLocale")
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            dateEdit.setText(String.format("%d - %d - %d", year, month + 1, day));
+            dateEdit.setText(String.format("%d  %d  %d", year, month + 1, day));
         }
+    }
+
+    private void writeNewDate(String userId, String title, String mDate) {
+
     }
 }
