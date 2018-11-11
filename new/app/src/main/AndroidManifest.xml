@@ -23,10 +23,6 @@
         <activity android:name=".AddDateActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
-        <activity
-            android:name=".DateDetailActivity"
-            android:label="@string/title_activity_date_detail"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,32 +15,69 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.firebase.ui.database.FirebaseListOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     FirebaseAuth auth;
     FirebaseUser user;
+    DatabaseReference database;
+
+    ListView listView;
+    ArrayList<DateItem> dateList = new ArrayList<>();
+    DateAdaper myAdapter;
 
     TextView loggedInUser;
     TextView loggedInEmail;
 
+    final static public String TAG = "Start LoginActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
         loggedInUser = findViewById(R.id.loggedInUser);
         loggedInEmail = findViewById(R.id.loggedInEmail);
+        listView = findViewById(R.id.listview);
+
+        myAdapter = new DateAdaper(this, dateList);
+        listView.setAdapter(myAdapter);
+
+        //Intent intent = getIntent();
+        //loggedInUser.setText(intent.getStringExtra("User_name"));
+        //loggedInEmail.setText(intent.getStringExtra("User_email"));
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
+
+        if (user == null) {
+            Log.i(TAG, "Now it has no user");
+            startActivity(new Intent(this, LoginActivity.class));
+        } else {
+            Log.i(TAG, "It is cool");
+        }
 
         setSupportActionBar(toolbar);
 
@@ -58,6 +96,12 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        String queryUser = "dates/" + user.getUid();
+        database = FirebaseDatabase.getInstance().getReference(queryUser);
+        database.addListenerForSingleValueEvent(valueEventListener);
+
+
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -65,10 +109,26 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = headerView.findViewById(R.id.loggedInUser);
+        if (user == null) {
+            navUsername.setText("Okay, fine");
+        } else {
+            String useridid = user.getUid();
+            navUsername.setText(useridid);
+        }
         navigationView.setNavigationItemSelectedListener(this);
-
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // Handle the already logged in user
+        if (auth.getCurrentUser() != null) {
+
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -139,4 +199,25 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    ValueEventListener valueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            dateList.clear();
+
+            if (dataSnapshot.exists()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    DateItem dateItem = snapshot.getValue(DateItem.class);
+                    dateList.add(dateItem);
+                }
+
+                myAdapter.notifyDataSetChanged();
+            }
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+        }
+    };
 }

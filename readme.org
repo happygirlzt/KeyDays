@@ -308,3 +308,109 @@ Pay attention to using Realtim Database carefully.
 1. ListView can present the saved dates
 2. Add new user in database
 3. A user can add new date and delete date
+
+** Firebase
+
+*** nested map
+
+
+*** Auto-generated keys
+Firebase can make up IDs by push
+
+*** Two ways to add customized User information to Firebase
+1.
+#+BEGIN_SRC java
+FirebaseUser user = firebaseAuth.getCurrentUser();
+
+                                    // Get the generated unique key
+                                    //  key = database.getReference("users").push().getKey();
+
+                                    String userId = user.getUid();
+                                    User u = new User();
+                                    u.setUserid(userId);
+                                    u.setUsername(name);
+                                    u.setUseremail(email);
+
+
+                                    Map<String, Object> childUpdates = new HashMap<>();
+                                    // assert key != null;
+                                    childUpdates.put(userId, u.toFirebaseObj());
+
+                                    // Update database and get notified when it finished
+                                    database.getReference("users").updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
+                                        @Override
+                                        public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                                            if (databaseError == null) {
+                                                finish();
+                                            }
+                                        }
+                                    });
+#+END_SRC
+
+2.
+#+BEGIN_SRC java
+User user = new User(userId, name, email);
+
+FirebaseDatabase.getInstance().getReference("users")
+.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+.setValue(user).addOnCompleteListener(new onCompleteListener<Void>() {
+   @Override
+   public void onComplete(@NonNull Task<Void> task) {
+       if (task.isSuccessful()) {
+            Toast.makeText(MainActivity.this, "Successfully", Toast.LENGTH_LONG).show();
+        } else {
+             // display other message
+         }
+   }
+}
+#+END_SRC
+
+*** ListView adaper
+#+BEGIN_SRC java
+myAdapter = new FirebaseListAdapter<DateItem>(options) {
+            @Override
+            protected void populateView(@NonNull View view, @NonNull DateItem dateItem, int pos) {
+                // get current item to be displayed
+                DateItem item = getItem(pos);
+
+                // get the TextView for item name and item description
+                TextView tvDateTitle = view.findViewById(R.id.dateTitle);
+                TextView tvDateDate = view.findViewById(R.id.dateDate);
+                TextView tvPastComing = view.findViewById(R.id.pastOrComing);
+                TextView tvDateSuffix = view.findViewById(R.id.dateSuffix);
+
+                //sets the text for item name and item description from the current item object
+                tvDateTitle.setText(item.getTitle());
+                tvDateDate.setText(item.getmDate());
+                String suf = "days";
+                tvDateSuffix.setText(suf);
+
+                // Calculate the days between given date and today
+                final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
+
+                // SimpleDateFormat mFormat = new SimpleDateFormat("yyyy MM dd");
+                String d1 = item.getmDate();
+                LocalDateTime today = LocalDateTime.now();
+                String d2 = formatter.format(today);
+
+                final LocalDate firstDate = LocalDate.parse(d1, formatter);
+                final LocalDate secondDate = LocalDate.parse(d2, formatter);
+                final long days = ChronoUnit.DAYS.between(firstDate, secondDate);
+
+                if (days >= 0) {
+                    String str = "Already " + days;
+                    tvPastComing.setText(str);
+                } else {
+                    String str = "Arrives in " + Math.abs(days);
+                    tvPastComing.setText(str);
+                }
+            }
+        };
+
+Query query = FirebaseDatabase.getInstance().getReference().child(queryUser);
+        FirebaseListOptions<DateItem> options = new FirebaseListOptions.Builder<DateItem>()
+                .setQuery(query, DateItem.class)
+                .setLayout(android.R.layout.simple_list_item_2)
+                .build();
+
+#+END_SRC

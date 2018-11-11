@@ -8,19 +8,12 @@
     android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/pastOrComing"
+        android:id="@+id/dateDate"
         style="@style/Base.TextAppearance.AppCompat.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/narrow_margin"
-        tools:text="Already 18"
+        android:layout_marginEnd="@dimen/general_margin"
+        tools:text="2019 12 1"
         />
-
-    <TextView
-        android:id="@+id/dateSuffix"
-        style="@style/Base.TextAppearance.AppCompat.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="days" />
 
 </LinearLayout>

@@ -69,16 +69,21 @@ public class AddDateActivity extends FragmentActivity {
 
                 Toast.makeText(AddDateActivity.this, dateStr, Toast.LENGTH_SHORT).show();
 
-                String key = database.getReference("dates").push().getKey();
+                String userId = user.getUid();
+
+                String key = database.getReference("dates/" + userId).push().getKey();
+
                 DateItem dateItem = new DateItem();
-                dateItem.setuId(user.getUid());
+                // dateItem.setuId(user.getUid());
                 dateItem.setTitle(titleStr);
                 dateItem.setmDate(dateStr);
 
                 Map<String, Object> childUpdates = new HashMap<>();
+                assert key != null;
                 childUpdates.put(key, dateItem.toFirebaseObj());
 
-                database.getReference("dates").updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
+                // Update database
+                database.getReference("dates/" + userId).updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                         if (databaseError == null) {
@@ -87,7 +92,7 @@ public class AddDateActivity extends FragmentActivity {
                     }
                 });
 
-                startActivity(new Intent(AddDateActivity.this, RegisterActivity.class));
+                startActivity(new Intent(AddDateActivity.this, MainActivity.class));
             }
         });
     }
@@ -114,7 +119,7 @@ public class AddDateActivity extends FragmentActivity {
 
         @SuppressLint("DefaultLocale")
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            dateEdit.setText(String.format("%d  %d  %d", year, month + 1, day));
+            dateEdit.setText(String.format("%d %d %d", year, month + 1, day));
         }
     }
 

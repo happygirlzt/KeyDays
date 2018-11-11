@@ -8,13 +8,11 @@ import java.util.Map;
  */
 public class DateItem {
 
-    public String uId;
+    // public String uId;
     public String title;
     public String mDate;
 
-    public void setuId(String uId) {
-        this.uId = uId;
-    }
+
 
     public void setTitle(String title) {
         this.title = title;
@@ -25,17 +23,23 @@ public class DateItem {
     }
 
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getmDate() {
+        return mDate;
+    }
+
     public DateItem() {}
 
-    public DateItem(String uId, String title, String mDate) {
-        this.uId = uId;
+    public DateItem(String title, String mDate) {
         this.title = title;
         this.mDate = mDate;
     }
 
     public Map<String, Object> toFirebaseObj() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("uid", uId);
         result.put("title", title);
         result.put("mDate", mDate);
 

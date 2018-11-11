@@ -7,4 +7,5 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="general_margin">22dp</dimen>
     <dimen name="large_font">22sp</dimen>
+    <dimen name="narrow_margin">12dp</dimen>
 </resources>

@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginActivity extends AppCompatActivity
@@ -30,11 +32,12 @@ public class LoginActivity extends AppCompatActivity
 
     private EditText et_email, et_password;
     private Button loginButton;
-    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth auth;
     private TextView directToRegister;
     private SignInButton signInButton;
     GoogleApiClient mGoogleApiClient;
 
+    private final static String TAG = "LoginActivity";
     private static final int RC_SIGN_IN = 123;
 
     @Override
@@ -48,12 +51,15 @@ public class LoginActivity extends AppCompatActivity
         directToRegister = findViewById(R.id.direct_to_register);
         signInButton = findViewById(R.id.sign_in_button);
 
-        // Get firebaseAuth instance
-        firebaseAuth = FirebaseAuth.getInstance();
+        // Get auth instance
+        auth = FirebaseAuth.getInstance();
 
-        if (firebaseAuth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        if (auth.getCurrentUser() != null) {
+            Log.i(TAG, "Have aaaaa user!!!!!!!!");
+            // startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
+        } else {
+            Log.i(TAG, "Have noouser!!!!!!!!");
         }
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -101,14 +107,19 @@ public class LoginActivity extends AppCompatActivity
                     }
 
                     //authenticate user
-                    firebaseAuth.signInWithEmailAndPassword(email, password)
+                    auth.signInWithEmailAndPassword(email, password)
                             .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                                     if (!task.isSuccessful()) {
+                                        Log.w(TAG, "signInWithEmail:failure", task.getException());
+
                                         Toast.makeText(LoginActivity.this, "Wrong email or password", Toast.LENGTH_LONG).show();
                                     } else {
+                                        Log.d(TAG, "signInWithEmail:success");
+                                        FirebaseUser user = auth.getCurrentUser();
+
                                         Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                         startActivity(intent);
@@ -142,7 +153,7 @@ public class LoginActivity extends AppCompatActivity
 
     private void authWithGoogle(GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(),null);
-        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        auth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
