@@ -79,7 +79,7 @@ public class AddDateActivity extends FragmentActivity {
                 String key = database.getReference("dates/" + userId).push().getKey();
 
                 DateItem dateItem = new DateItem();
-                // dateItem.setuId(user.getUid());
+                dateItem.setDateId(key);
                 dateItem.setTitle(titleStr);
                 dateItem.setmDate(dateStr);
 

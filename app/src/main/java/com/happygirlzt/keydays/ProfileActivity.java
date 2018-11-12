@@ -13,12 +13,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,6 +43,8 @@ public class ProfileActivity extends AppCompatActivity
     TextView loggedInUser;
     TextView loggedInEmail;
 
+    String dateId;
+
     final static public String TAG = "Start LoginActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +59,6 @@ public class ProfileActivity extends AppCompatActivity
         myAdapter = new DateAdaper(this, dateList);
         listView.setAdapter(myAdapter);
 
-        //Intent intent = getIntent();
-        //loggedInUser.setText(intent.getStringExtra("User_name"));
-        //loggedInEmail.setText(intent.getStringExtra("User_email"));
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
@@ -82,7 +83,7 @@ public class ProfileActivity extends AppCompatActivity
         String queryUser = "dates/" + user.getUid();
         database = FirebaseDatabase.getInstance().getReference(queryUser);
         database.addListenerForSingleValueEvent(valueEventListener);
-
+ //       database.addChildEventListener(new DateChildEventListener());
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -196,6 +197,30 @@ public class ProfileActivity extends AppCompatActivity
 
                 myAdapter.notifyDataSetChanged();
             }
+
+            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                    dateId = dateList.get(position).dateId;
+
+                    Toast.makeText(ProfileActivity.this, dateList.get(position).getTitle() + " deleted!", Toast.LENGTH_LONG).show();
+                    database.child(dateId).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            database.child(dateId).removeValue();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    dateList.remove(position);
+                    myAdapter.notifyDataSetChanged();
+                    return false;
+                }
+            });
         }
 
         @Override
@@ -203,4 +228,6 @@ public class ProfileActivity extends AppCompatActivity
 
         }
     };
+
+
 }
