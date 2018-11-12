@@ -1,6 +1,8 @@
 * Demo
 <2018-11-12 Mon 17:50>
 
+#+attr_html: :width 100px
+#+attr_latex: :width 100px
 [[https://github.com/happygirlzt/blog-img/blob/master/final.gif]]
 * Design
 ** Version 0
