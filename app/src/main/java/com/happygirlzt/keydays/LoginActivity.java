@@ -134,12 +134,11 @@ public class LoginActivity extends AppCompatActivity
                                         Toast.makeText(LoginActivity.this, "Wrong email or password", Toast.LENGTH_LONG).show();
                                     } else {
                                         Log.d(TAG, "signInWithEmail:success");
-                                        FirebaseUser user = auth.getCurrentUser();
-
+                                        //FirebaseUser user = auth.getCurrentUser();
                                         Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_LONG).show();
+                                        finish();
                                         Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
                                         startActivity(intent);
-                                        finish();
                                     }
                                 }
                             });

@@ -162,15 +162,17 @@ public class ProfileActivity extends AppCompatActivity
             } else {
                 auth.signOut();
 
+                if (database != null && valueEventListener != null) {
+                    database.removeEventListener(valueEventListener);
+                }
+
+                finish();
                 Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
 
                 // clear the previous activities
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 startActivity(intent);
-
-                finish();
             }
 
         } else if (id == R.id.nav_dates) {
@@ -230,4 +232,12 @@ public class ProfileActivity extends AppCompatActivity
     };
 
 
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        if (database != null && valueEventListener != null) {
+            database.removeEventListener(valueEventListener);
+        }
+    }
 }

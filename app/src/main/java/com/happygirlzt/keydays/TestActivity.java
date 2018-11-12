@@ -38,7 +38,13 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(TestActivity.this, LoginActivity.class));
+                finish();
+                Intent intent = new Intent(TestActivity.this, LoginActivity.class);
+
+                // clear the previous activities
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                startActivity(intent);
             }
         });
 

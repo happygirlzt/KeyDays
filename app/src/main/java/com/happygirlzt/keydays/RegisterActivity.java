@@ -128,15 +128,18 @@ public class RegisterActivity extends AppCompatActivity {
 
                                     Toast.makeText(getApplicationContext(), "Register successful!", Toast.LENGTH_SHORT).show();
                                     // Registered -> Login
-                                    Intent intent = new Intent(RegisterActivity.this, ProfileActivity.class);
-                                    intent.putExtra("User_name", name);
-                                    intent.putExtra("User_email", email);
-                                    startActivity(intent);
+
+                                    // clear the previous activities
 
                                     finish();
+                                    Intent intent = new Intent(RegisterActivity.this, ProfileActivity.class);
+
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+
                                 } else {
                                     Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(getApplicationContext(),"E-mail or password is wrong",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),"E-mail already exists!",Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

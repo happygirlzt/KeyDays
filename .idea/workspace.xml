@@ -25,9 +25,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/AddDateActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/AddDateActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/DateItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/DateItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/LoginActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/ProfileActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/ProfileActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/RegisterActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/RegisterActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/TestActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/TestActivity.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -48,22 +50,32 @@
       </state>
     </system>
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="KeyDays" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="ProfileActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/ProfileActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="214" selection-start-line="214" selection-end-line="214" />
+            <state relative-caret-position="912">
+              <caret line="231" column="6" lean-forward="true" selection-start-line="188" selection-start-column="4" selection-end-line="231" selection-end-column="6" />
               <folding>
-                <element signature="e#2271#2812#0" expanded="true" />
-                <element signature="e#2811#2812#0" expanded="true" />
-                <element signature="e#3256#3287#0" expanded="true" />
-                <element signature="e#3289#3321#0" expanded="true" />
                 <element signature="e#4105#4106#0" expanded="true" />
                 <element signature="e#4136#4137#0" expanded="true" />
-                <element signature="e#6879#7448#0" expanded="true" />
-                <element signature="e#7447#7448#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/TestActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="25" selection-start-line="25" selection-end-line="25" />
+              <folding>
+                <element signature="e#973#1226#0" expanded="true" />
+                <element signature="e#1225#1226#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -72,7 +84,7 @@
       <file leaf-file-name="DateItem.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/DateItem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
+            <state relative-caret-position="578">
               <caret line="43" column="27" selection-start-line="43" selection-start-column="27" selection-end-line="43" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -82,6 +94,22 @@
                 <element signature="e#372#373#0" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="140">
+              <caret line="7" column="42" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
+              <folding>
+                <element signature="e#299#317#0" expanded="true" />
+                <element signature="e#571#589#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+          <provider editor-type-id="android-manifest">
+            <state />
           </provider>
         </entry>
       </file>
@@ -105,6 +133,27 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="220">
               <caret line="11" column="54" selection-start-line="11" selection-start-column="54" selection-end-line="11" selection-end-column="54" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/LoginActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2020">
+              <caret line="140" column="62" selection-start-line="140" selection-start-column="62" selection-end-line="140" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RegisterActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/RegisterActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2227">
+              <caret line="138" selection-start-line="138" selection-end-line="138" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -2425,11 +2474,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/User.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_date.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/RegisterActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/TestActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/DateAdaper.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/include_date_title.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
@@ -2448,7 +2493,11 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/include_date_date.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/AddDateActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/DateItem.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/ProfileActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/TestActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/RegisterActivity.java" />
       </list>
     </option>
   </component>
@@ -2689,30 +2738,30 @@
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="Android Profiler" order="7" sideWeight="0.49946752" weight="0.32935324" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49733758" weight="0.31442785" />
+      <window_info anchor="bottom" id="Android Profiler" order="7" sideWeight="0.49893504" weight="0.32935324" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4968051" weight="0.31442785" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
-      <window_info id="Build Variants" order="2" sideWeight="0.5013774" side_tool="true" weight="0.18956336" />
+      <window_info id="Build Variants" order="2" sideWeight="0.5014837" side_tool="true" weight="0.1943557" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.44089457" side_tool="true" visible="true" weight="0.22288558" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.44142705" side_tool="true" weight="0.22288558" />
       <window_info anchor="right" id="Preview" order="3" weight="0.30085197" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.55910546" visible="true" weight="0.22288558" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49946752" weight="0.32935324" />
-      <window_info anchor="bottom" id="Logcat" order="7" sideWeight="0.69808304" weight="0.2885572" />
-      <window_info id="Captures" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.55857295" weight="0.22288558" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49946752" weight="0.32935324" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49893504" weight="0.32935324" />
+      <window_info anchor="bottom" id="Logcat" order="7" sideWeight="0.6975506" weight="0.2885572" />
+      <window_info id="Captures" order="2" weight="0.24973376" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4986226" visible="true" weight="0.1943557" />
-      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.7060703" weight="0.18208955" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49946752" weight="0.32935324" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4980794" visible="true" weight="0.1943557" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.7055378" weight="0.18208955" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49840257" weight="0.32935324" />
       <window_info anchor="right" id="Gradle" order="3" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Structure" order="1" sideWeight="0.50192064" side_tool="true" weight="0.1943557" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" id="Device File Explorer" order="3" side_tool="true" weight="0.32960597" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info id="Favorites" order="2" sideWeight="0.5014837" side_tool="true" weight="0.1943557" />
       <window_info anchor="right" id="Assistant" order="4" weight="0.32960597" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -2722,36 +2771,36 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
     <layout-to-restore>
-      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.60969114" weight="0.21791045" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.7055378" weight="0.18208955" />
       <window_info id="Designer" order="2" />
-      <window_info id="Build Variants" order="3" side_tool="true" />
+      <window_info id="Build Variants" order="3" sideWeight="0.5014837" side_tool="true" weight="0.1943557" />
       <window_info id="Image Layers" order="4" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.56070286" weight="0.22288558" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.55857295" visible="true" weight="0.22288558" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Android Profiler" order="8" />
-      <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info id="Captures" order="6" weight="0.25" />
+      <window_info anchor="bottom" id="Android Profiler" order="8" sideWeight="0.49893504" weight="0.32935324" />
+      <window_info id="Favorites" order="5" sideWeight="0.5014837" side_tool="true" weight="0.1943557" />
+      <window_info id="Captures" order="6" weight="0.24973376" />
       <window_info id="Capture Tool" order="7" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.2971246" side_tool="true" visible="true" weight="0.27761194" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.44142705" side_tool="true" visible="true" weight="0.22288558" />
       <window_info anchor="right" id="Preview" order="4" weight="0.30085197" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Device File Explorer" order="5" side_tool="true" />
+      <window_info anchor="right" id="Device File Explorer" order="5" side_tool="true" weight="0.32960597" />
       <window_info anchor="right" id="Assistant" order="9" weight="0.32960597" />
-      <window_info active="true" anchor="bottom" id="Logcat" order="10" sideWeight="0.7028754" visible="true" weight="0.27761194" />
-      <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="12" />
+      <window_info anchor="bottom" id="Logcat" order="10" sideWeight="0.6975506" weight="0.2885572" />
+      <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.49946752" weight="0.32935324" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.49893504" weight="0.32935324" />
       <window_info anchor="right" id="Gradle" order="6" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18956336" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4980794" visible="true" weight="0.1943557" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49893504" weight="0.31442785" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4968051" weight="0.31442785" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Structure" order="1" sideWeight="0.50192064" side_tool="true" visible="true" weight="0.1943557" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49840257" weight="0.32935324" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
     </layout-to-restore>
   </component>
@@ -2850,16 +2899,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/RegisterActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -2902,30 +2941,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/LoginActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1555">
-          <caret line="142" column="37" selection-start-line="142" selection-start-column="37" selection-end-line="142" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="1" column="68" selection-start-line="1" selection-start-column="68" selection-end-line="1" selection-end-column="68" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/TestActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="40" column="73" selection-start-line="40" selection-start-column="73" selection-end-line="40" selection-end-column="73" />
         </state>
       </provider>
     </entry>
@@ -3140,9 +3155,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2020">
+          <caret line="140" column="62" selection-start-line="140" selection-start-column="62" selection-end-line="140" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/DateItem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
+        <state relative-caret-position="578">
           <caret line="43" column="27" selection-start-line="43" selection-start-column="27" selection-end-line="43" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -3154,19 +3176,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="7" column="42" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
+          <folding>
+            <element signature="e#299#317#0" expanded="true" />
+            <element signature="e#571#589#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/TestActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+          <folding>
+            <element signature="e#973#1226#0" expanded="true" />
+            <element signature="e#1225#1226#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/RegisterActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2227">
+          <caret line="138" selection-start-line="138" selection-end-line="138" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/happygirlzt/keydays/ProfileActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="214" selection-start-line="214" selection-end-line="214" />
+        <state relative-caret-position="912">
+          <caret line="231" column="6" lean-forward="true" selection-start-line="188" selection-start-column="4" selection-end-line="231" selection-end-column="6" />
           <folding>
-            <element signature="e#2271#2812#0" expanded="true" />
-            <element signature="e#2811#2812#0" expanded="true" />
-            <element signature="e#3256#3287#0" expanded="true" />
-            <element signature="e#3289#3321#0" expanded="true" />
             <element signature="e#4105#4106#0" expanded="true" />
             <element signature="e#4136#4137#0" expanded="true" />
-            <element signature="e#6879#7448#0" expanded="true" />
-            <element signature="e#7447#7448#0" expanded="true" />
           </folding>
         </state>
       </provider>
