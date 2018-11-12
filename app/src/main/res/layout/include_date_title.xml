@@ -11,8 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
+        android:fontFamily="@font/delius_swash_caps"
         android:maxLines="1"
         android:textStyle="bold"
+        android:textColor="@color/colorTitle"
         tools:text="My First Post" />
 
 </LinearLayout>

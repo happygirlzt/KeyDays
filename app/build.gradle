@@ -45,6 +45,6 @@ dependencies {
     // FirebaseUI for Firebase Auth
     implementation 'com.firebaseui:firebase-ui-auth:4.2.1'
 
+    // implementation 'com.google.android.material:material:1.0.0-beta01'
 }
 
-com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true

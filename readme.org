@@ -414,3 +414,27 @@ Query query = FirebaseDatabase.getInstance().getReference().child(queryUser);
                 .build();
 
 #+END_SRC
+
+
+** UI design
+Material design
+
+*** Customized all the buttons
+1. text color - button_text.xml
+  - differences between focused and default state
+2. shape of buttons - button_style.xml
+
+*** Use Google Fonts
+
+*** Change the default color to purple
+
+** Add delete item function <2018-11-12 Mon>
+Remove a value from Firebase
+
+removeValue()
+
+#+BEGIN_SRC java
+public void remove(DateItem dateItem) {
+     ref.child(dateItem.getKey()).removeValue();
+}
+#+END_SRC

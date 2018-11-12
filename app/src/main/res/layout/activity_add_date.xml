@@ -11,6 +11,7 @@
         android:id="@+id/adddate_toolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:titleTextColor="@android:color/white"
         android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar"
         android:background="@color/colorPrimary">
     </Toolbar>
@@ -72,6 +73,8 @@
 
     <Button
         android:id="@+id/add_date"
+        style="@style/Widget.Button"
+        android:textColor="@drawable/button_text"
         android:layout_width="match_parent"
         android:layout_marginLeft="@dimen/general_margin"
         android:layout_marginRight="@dimen/general_margin"

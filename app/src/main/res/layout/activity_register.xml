@@ -20,11 +20,19 @@
             android:id="@+id/register_toolBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:titleTextColor="@android:color/white"
             android:background="@color/colorPrimary"
             android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar">
 
         </Toolbar>
-            <!-- 编辑框 -->
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -93,6 +101,8 @@
         <Button
             android:id="@+id/register_button"
             android:layout_marginTop="@dimen/activity_vertical_margin"
+            style="@style/Widget.Button"
+            android:textColor="@drawable/button_text"
             android:layout_marginBottom="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,12 +110,7 @@
             android:text="@string/register"
             />
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone"/>
+
 
     </LinearLayout>
 </ScrollView>

@@ -112,11 +112,6 @@ public class ProfileActivity extends AppCompatActivity
     @Override
     public void onStart() {
         super.onStart();
-
-        // Handle the already logged in user
-        if (auth.getCurrentUser() != null) {
-
-        }
     }
 
     @Override

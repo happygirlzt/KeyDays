@@ -13,12 +13,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/narrow_margin"
-        tools:text="Already 18"
-        />
+        android:textColor="@color/colorSuffix"
+        android:fontFamily="@font/copse"
+        tools:text="Already 18" />
 
     <TextView
         android:id="@+id/dateSuffix"
         style="@style/Base.TextAppearance.AppCompat.Large"
+        android:textColor="@color/colorDays"
+        android:fontFamily="@font/copse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="days" />

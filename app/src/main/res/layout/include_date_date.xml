@@ -13,7 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/general_margin"
-        tools:text="2019 12 1"
-        />
+        android:textColor="@color/colorDate"
+        android:fontFamily="@font/delius_swash_caps"
+        tools:text="2019 12 1" />
 
 </LinearLayout>
