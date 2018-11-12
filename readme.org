@@ -1,0 +1,495 @@
+* Demo
+<2018-11-12 Mon 17:50>
+
+[[https://github.com/happygirlzt/blog-img/blob/master/final.gif]]
+* Design
+** Version 0
+KeyDays shows the dates that are important to the user. The app displays dates and countdown days to the user.
+
+- User can *scroll through* past dates and upcoming dates.
+- Layout is optimized with the ViewHolder pattern.
+- For each movie displayed, user can see the following details:
+  + Tile, date, past days(or the days left)
+- User interface imporved through styling nad coloring and using material design elements such as CardView and Navigation Drawer.
+- The app is using Espresso to text the UI interactions.
+
+** Version 1
+Date: <2018-10-07 Sun>
+
+MainActivity has left drawerLayout and on the right of the top has ADD button. The user can also change the layout to grid, verse visa.
+
+Log in /Register Activity
+
+*** Activities
+1. MainActivity
+Cover
+List the recorded events -> Right wrap to delete
+Menu
+Add button -> AddDateActivity
+
+2. LoginActivity
+
+3. AddDateActivity
+
+*** Database
+1. table1: users. Record the user name, email and password.
+2. table2: keydates. Each user has his own table, which is recorddate.
+
+One-to-many relationship
+
+**** The user table
+primary_key: user_id
+
+| id | user_name | user_email | user_password  |
+|----+-----------+------------+----------------|
+|    |           |            |                |
+
+#+BEGIN_SRC
+CREATE TABLE user (
+   id    INTEGER PRIMARY KEY AUTOINCREMENT,
+   user_name  TEXT    NOT NULL,
+   user_email TEXT    NOT NULL,
+   user_password TEXT NOT NULL
+);
+#+END_SRC
+
+**** The keydate table
+primary_key: keydate_id
+foreign key: users(user_id)
+
+| keydate_id | keydate_name | user_id | remaining_days | past_days |
+|------------+--------------+---------+----------------+-----------|
+|            |              |         |                |           |
+#+BEGIN_SRC
+CREATE TABLE keydate (
+   keydate_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+   keydate_name TEXT NOT NULL,
+   user_id INTEGER NOT NULL CONSTRAINT user_id REFERENCES user(id) ON DELETE CASCADE,
+   remaining_days INTEGER,
+   past_days INTEGER
+);
+#+END_SRC
+
+** Version 2
+*** Database
+<2018-10-19 Fri 16:33>
+
+重构数据库...
+三张表比较科学
+
+1. user
+这张表用来记录用户信息
+| id | email | first_name | last_name | password |
+|----+-------+------------+-----------+----------|
+|    |       |            |           |          |
+2. keydate
+| id | title | date |
+|----+-------+------|
+|    |       |      |
+这张表用来记录所有的日期
+3. users_keydates
+这张表用来记录哪个用户存了哪个日期
+| user_id | keydate_id |
+|---------+------------|
+|         |            |
+
+注意一点，column name和table name是case-sensitive
+* 开发笔记
+** MVC架构
+- Model: models里相关的java文件
+- View: 主要是layout里面的文件
+- Controller: 用来控制view，主要是activies文件夹下的文件，主要是继承自Activity,Fragment和Service的
+
+** 动态设定textview的值
+在activity_date_details.xml里，不需要hard-code每个记录的日期的name,remainingdays和date，这个需要在对应的java里setText。因为这个是根据具体日期来变化的。
+
+** onCreate()函数
+ 一般来说，activity的onCreate()有如下4个作用：
+- inflating  widgets and putting them on screen(调用setContentView(int))
+- getting references to inflated widgets
+- setting listeners on widgets to handle user interaction
+- connecting to external model data
+
+要注意，我们每次调用onCreate()时，实际上是override父类的方法
+
+** actionbar的设置
+如果不想要actionbar但是activity又继承自AppCompatActivity的话，APP的theme要改成
+#+BEGIN_SRC
+android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+#+END_SRC
+
+** fragment/activity通信
+fragment和activity之间的通信问题：
+
+** toolbar设置
+为了使用自定义的toolbar,需要用noactionbar的主题
+#+BEGIN_SRC
+<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+#+END_SRC
+
+** Database
+login and register with database
+
+#+BEGIN_SRC
+SQLiteDatabase db = openOrCreateDatabase(
+"name", MODE_PRIVATE, null);
+db.execSQL("SQL query");
+#+END_SRC
+
+两种类型的SQL commands
+- rawQuery  如果需要返回结果的话(e.g. SELECT)
+- execSQL 如果不需要返回结果的话(e.g. INSERT, DELETE, UPDATE)
+*** 常用操作
+#+BEGIN_SRC
+db.delete("table", "whereClause", args);
+db.insert("table", null, values);
+db.update("table", values, "whereClause", args);
+db.execSQL("query");
+db.rawQuery("SQL query", args);
+#+END_SRC
+
+*** Cursor
+Android SQLite API returns an object called a Cursor that allows you to iterate through the results of a SELECT query.
+
+比较像一个指针，位于结果集中的某个位置。
+- 可以forward to next result row
+- ask the cursor for values of columns of its "current" row
+
+看下面这个用法：
+#+BEGIN_SRC
+Cursor cr = db.rawQuery(
+            "SELECT id, email FROM user", null);
+
+if (cr.moveToFirst()) {
+   do {
+      int id = cr.getInt(cr.getColumnIndex("id"));
+      String emial = cr.getString(cr.getColumnIndex("email"));
+      ...
+   } while (cr.moveToNext());
+
+   cr.close();
+}
+#+END_SRC
+
+Cursor methods
+- c.close();
+- c.getColumnIndex("name"); 根据列的名字返回列的index
+- c.getColumnName(index); 根据列的index返回列的名字
+- c.getCount(); 返回结果的行数
+- c.getDouble(index), c.getFloat(index), c.getLong(index) 从列中取数据
+- c.isBeforeFirst(), c.isFirst(), c.isLast()
+- c.moveToFirst(), c.moveToLast(), c.moveToNext(), c.moveToPosition(index), 让cursor移动位置
+** selectionArgs
+在用sqlite查询的时候，准确地说是，用cursor进行query的时候，函数是
+#+BEGIN_SRC
+public Cursor query(String table,
+                    String[] columns,
+                    String selection,
+                    String[] selectionArgs,
+                    String groupBy,
+                    String having,
+                    String orderBy);
+#+END_SRC
+
+columns就是要返回的列
+selection，就是where后面的过滤条件
+selectionArgs，是如果selection种有string的时候，用来转义的，在selection中需要嵌入字符串的地方用?代替
+举个例子：
+#+BEGIN_SRC
+public void doQuery(long id, final String name) {
+   db.query("TABLE_NAME",
+            null,
+            "id=" + id + "AND name=?",
+            new String[] {name},
+            null,
+            null,
+            null
+   );
+}
+#+END_SRC
+
+** 关于Date的处理
+因为sqlite里面没有getDate()这个method，所以在定义date模型的时候，要把时间设置为Long
+
+** button的onClickListener()的三种处理办法
+- 在activity对应的xml文件中设置onclick对应的事件名
+ 比如在xml文件中给button设置了add方法
+#+BEGIN_SRC
+android:onClick="add"
+#+END_SRC
+ 再去对应的java文件中，实现add函数即可
+#+BEGIN_SRC
+public void add(View view) {
+
+}
+#+END_SRC
+
+- 直接在对应的activity中为对应的button设置绑定函数
+#+BEGIN_SRC
+protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.main);
+
+  findViewById(R.id.Button).setOnClickListener(new OnClickListener(){
+    @Override
+    public void onClick(View v) {
+      Intent intent = new Intent(mainActivity.this, fristActivity.class);
+      intent.putExtra("data", "mainActivity");
+      startActivity(intent);
+    }
+  });
+}
+#+END_SRC
+
+这个的问题是，如果同一个activity中有多个button，代码会看上去很乱
+
+- 最后一种适用于一个页面有多个button
+实现setOnClickListener()这个接口
+#+BEGIN_SRC
+public class mainActivity extends Activity implements OnClickListener{
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.main);
+    findViewById(R.id.Button).setOnClickListener(this);
+    findViewById(R.id.Button1).setOnClickListener(this);
+  }
+
+  public void onClick(View view) {
+    switch (v.getId()) {
+      case R.id.Button:
+        ...
+        break;
+
+      case R.id.Button1:
+        ...
+        break;
+      default:
+        break;
+    }
+  }
+}
+#+END_SRC
+
+** layout_width不能少！
+对于每个widget,layout_width都是必须的！！！即使用了layout_weight，也需要设置width！！！
+
+** List events
+List views respond to the following events
+- setOnItemClickListener(AdapterView.OnItemClickListener)
+- setOnItemLongClickListener(AdapterView.OnItemLongClickListener)
+- setOnItemSelectedListener(AdapterView.OnItemSelectedListener)
+onDrag
+
+onFocusChanged
+
+onHover
+
+onKey
+
+onScroll
+
+onTouch
+** TextInputLayout、TextInputEditText
+EditText在输入的时候，hint会自动隐藏。而TextInputLayout是LinearLayout的子类，用于辅助显示提示信息。当EditText输入信息的时候，hint会显示在上方。
+* Refactor <2018-11-09 Fri>
+Using Firebase
+
+** Essential Parts
+*** Four Activities
+1. The mainActivity
+  - A floating Action button to add new events
+  - Right slip to delete an event
+2. A detail of an event
+3. Add new event
+4. Login/Sign up
+  - Storing in Firebase
+。。。。。
+很伤心，搞了半天，不知道为什么添加不了数据到firebase。。。然后晚上才发现。。。原来我一直选的是cloud firestore而不是realtime database。。。。。。。。
+
+Pay attention to using Realtim Database carefully.
+
+** TODO <2018-11-10 Sat>
+1. ListView can present the saved dates
+2. Add new user in database
+3. A user can add new date and delete date
+
+** Firebase
+
+*** nested map
+
+
+*** Auto-generated keys
+Firebase can make up IDs by push
+
+*** Two ways to add customized User information to Firebase
+1.
+#+BEGIN_SRC java
+FirebaseUser user = firebaseAuth.getCurrentUser();
+
+                                    // Get the generated unique key
+                                    //  key = database.getReference("users").push().getKey();
+
+                                    String userId = user.getUid();
+                                    User u = new User();
+                                    u.setUserid(userId);
+                                    u.setUsername(name);
+                                    u.setUseremail(email);
+
+
+                                    Map<String, Object> childUpdates = new HashMap<>();
+                                    // assert key != null;
+                                    childUpdates.put(userId, u.toFirebaseObj());
+
+                                    // Update database and get notified when it finished
+                                    database.getReference("users").updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
+                                        @Override
+                                        public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                                            if (databaseError == null) {
+                                                finish();
+                                            }
+                                        }
+                                    });
+#+END_SRC
+
+2.
+#+BEGIN_SRC java
+User user = new User(userId, name, email);
+
+FirebaseDatabase.getInstance().getReference("users")
+.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+.setValue(user).addOnCompleteListener(new onCompleteListener<Void>() {
+   @Override
+   public void onComplete(@NonNull Task<Void> task) {
+       if (task.isSuccessful()) {
+            Toast.makeText(MainActivity.this, "Successfully", Toast.LENGTH_LONG).show();
+        } else {
+             // display other message
+         }
+   }
+}
+#+END_SRC
+
+*** ListView adaper
+#+BEGIN_SRC java
+myAdapter = new FirebaseListAdapter<DateItem>(options) {
+            @Override
+            protected void populateView(@NonNull View view, @NonNull DateItem dateItem, int pos) {
+                // get current item to be displayed
+                DateItem item = getItem(pos);
+
+                // get the TextView for item name and item description
+                TextView tvDateTitle = view.findViewById(R.id.dateTitle);
+                TextView tvDateDate = view.findViewById(R.id.dateDate);
+                TextView tvPastComing = view.findViewById(R.id.pastOrComing);
+                TextView tvDateSuffix = view.findViewById(R.id.dateSuffix);
+
+                //sets the text for item name and item description from the current item object
+                tvDateTitle.setText(item.getTitle());
+                tvDateDate.setText(item.getmDate());
+                String suf = "days";
+                tvDateSuffix.setText(suf);
+
+                // Calculate the days between given date and today
+                final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
+
+                // SimpleDateFormat mFormat = new SimpleDateFormat("yyyy MM dd");
+                String d1 = item.getmDate();
+                LocalDateTime today = LocalDateTime.now();
+                String d2 = formatter.format(today);
+
+                final LocalDate firstDate = LocalDate.parse(d1, formatter);
+                final LocalDate secondDate = LocalDate.parse(d2, formatter);
+                final long days = ChronoUnit.DAYS.between(firstDate, secondDate);
+
+                if (days >= 0) {
+                    String str = "Already " + days;
+                    tvPastComing.setText(str);
+                } else {
+                    String str = "Arrives in " + Math.abs(days);
+                    tvPastComing.setText(str);
+                }
+            }
+        };
+
+Query query = FirebaseDatabase.getInstance().getReference().child(queryUser);
+        FirebaseListOptions<DateItem> options = new FirebaseListOptions.Builder<DateItem>()
+                .setQuery(query, DateItem.class)
+                .setLayout(android.R.layout.simple_list_item_2)
+                .build();
+
+#+END_SRC
+
+
+** UI design
+Material design
+
+*** Customized all the buttons
+1. text color - button_text.xml
+  - differences between focused and default state
+2. shape of buttons - button_style.xml
+
+*** Use Google Fonts
+
+*** Change the default color to purple
+
+** Add delete item function <2018-11-12 Mon>
+Remove a value from Firebase
+
+removeValue()
+#+BEGIN_SRC java
+ValueEventListener valueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            dateList.clear();
+
+            if (dataSnapshot.exists()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    DateItem dateItem = snapshot.getValue(DateItem.class);
+                    dateList.add(dateItem);
+                }
+
+                myAdapter.notifyDataSetChanged();
+            }
+
+            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                    dateId = dateList.get(position).dateId;
+
+                    Toast.makeText(ProfileActivity.this, dateList.get(position).getTitle() + " deleted!", Toast.LENGTH_LONG).show();
+                    database.child(dateId).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            database.child(dateId).removeValue();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    dateList.remove(position);
+                    myAdapter.notifyDataSetChanged();
+                    return false;
+                }
+            });
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+        }
+    };
+#+END_SRC
+
+** Close all the previous activities
+#+BEGIN_SRC java
+finish();
+Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+
+// clear the previous activities
+intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+startActivity(intent);
+#+END_SRC
