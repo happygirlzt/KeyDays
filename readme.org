@@ -1,9 +1,18 @@
 * Demo
 <2018-11-12 Mon 17:50>
 
-#+attr_html: :width 100px
-#+attr_latex: :width 100px
+#+CAPTION: Weight space
+#+ATTR_HTML: :alt neural network :title Neural network representation :align right
+#+ATTR_HTML: :width 50% :height 50%
 [[https://github.com/happygirlzt/blog-img/blob/master/final.gif]]
+
+
+* Introduction
+This Android application enables user to register and login to keep their important dates tracked. It can be seen as a date countdown, you can see how many days have past or how many days are left before that date.
+
+This app uses Firebase to authenticate and store real-time database.
+
+-- The following is archived dev notes
 * Design
 ** Version 0
 KeyDays shows the dates that are important to the user. The app displays dates and countdown days to the user.
