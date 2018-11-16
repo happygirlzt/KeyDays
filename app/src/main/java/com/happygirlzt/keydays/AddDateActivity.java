@@ -38,18 +38,21 @@ public class AddDateActivity extends FragmentActivity {
 
     final static FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-    static FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_date);
+
         addButton = findViewById(R.id.add_date);
         dateEdit = findViewById(R.id.et_date);
         titleEdit = findViewById(R.id.et_title);
         toolbar = findViewById(R.id.adddate_toolBar);
 
         toolbar.setTitle("Add New Date");
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         dateEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,9 +129,9 @@ public class AddDateActivity extends FragmentActivity {
         public void onDateSet(DatePicker view, int year, int month, int day) {
             if (month < 9 && day >= 10) {
                 dateEdit.setText(String.format("%d %d%d %d", year, 0, month + 1, day));
-            } else if (month < 9 && day < 10) {
+            } else if (month < 9) {
                 dateEdit.setText(String.format("%d %d%d %d%d", year, 0, month + 1, 0, day));
-            } else if (month >= 9 && day < 10) {
+            } else if (day < 10) {
                 dateEdit.setText(String.format("%d %d %d%d", year, month + 1, 0, day));
             } else {
                 dateEdit.setText(String.format("%d %d %d", year, month + 1, day));
@@ -136,7 +139,10 @@ public class AddDateActivity extends FragmentActivity {
         }
     }
 
-    private void writeNewDate(String userId, String title, String mDate) {
-
+    @Override
+    public void onStart() {
+        super.onStart();
+        user = FirebaseAuth.getInstance().getCurrentUser();
     }
+
 }

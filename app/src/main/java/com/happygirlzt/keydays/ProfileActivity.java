@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -35,6 +36,7 @@ public class ProfileActivity extends AppCompatActivity
     FirebaseAuth auth;
     FirebaseUser user;
     DatabaseReference database;
+    FirebaseAuth.AuthStateListener authStateListener;
 
     ListView listView;
     ArrayList<DateItem> dateList = new ArrayList<>();
@@ -62,6 +64,12 @@ public class ProfileActivity extends AppCompatActivity
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+            }
+        };
 
         setSupportActionBar(toolbar);
 
@@ -96,7 +104,7 @@ public class ProfileActivity extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = headerView.findViewById(R.id.loggedInUser);
         if (user == null) {
-            navUsername.setText("Please Log in!");
+            navUsername.setText(getString(R.string.loginPromp));
         } else {
             String regards = "Welcome, back: ";
             navUsername.setText(regards);
@@ -113,6 +121,7 @@ public class ProfileActivity extends AppCompatActivity
     @Override
     public void onStart() {
         super.onStart();
+        FirebaseAuth.getInstance().addAuthStateListener(authStateListener);
     }
 
     @Override
@@ -160,19 +169,23 @@ public class ProfileActivity extends AppCompatActivity
             if (auth.getCurrentUser() == null) {
                 Toast.makeText(this, "You haven't logged in!", Toast.LENGTH_SHORT).show();
             } else {
-                auth.signOut();
+                // auth.signOut();
+                FirebaseAuth.getInstance().signOut();
 
                 if (database != null && valueEventListener != null) {
                     database.removeEventListener(valueEventListener);
+                    FirebaseAuth.getInstance().removeAuthStateListener(authStateListener);
                 }
 
                 finish();
+                Toast.makeText(ProfileActivity.this, "Logged Out", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
 
                 // clear the previous activities
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 startActivity(intent);
+
             }
 
         } else if (id == R.id.nav_dates) {
@@ -238,6 +251,7 @@ public class ProfileActivity extends AppCompatActivity
 
         if (database != null && valueEventListener != null) {
             database.removeEventListener(valueEventListener);
+            FirebaseAuth.getInstance().removeAuthStateListener(authStateListener);
         }
     }
 }

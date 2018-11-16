@@ -18,4 +18,5 @@
     <string name="not_logged_msg">You are not logged in!!!</string>
     <string name="log_out">Log Out</string>
     <string name="to_profile">To Profile</string>
+    <string name="loginPromp">Please Log in!</string>
 </resources>

@@ -134,6 +134,7 @@ public class LoginActivity extends AppCompatActivity
                                         Toast.makeText(LoginActivity.this, "Wrong email or password", Toast.LENGTH_LONG).show();
                                     } else {
                                         Log.d(TAG, "signInWithEmail:success");
+                                        //auth.updateCurrentUser(auth.getCurrentUser());
                                         //FirebaseUser user = auth.getCurrentUser();
                                         Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_LONG).show();
                                         finish();
@@ -142,6 +143,7 @@ public class LoginActivity extends AppCompatActivity
                                     }
                                 }
                             });
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -185,5 +187,10 @@ public class LoginActivity extends AppCompatActivity
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 }

@@ -1,3 +1,12 @@
+* Update
+Updated on <2018-11-16 Fri 17:52>
+
+Fixed the bug when you log out, the date you record is still recorded on the last user.
+
+The reason is I haven't deal with the onStart(), as when AddActivity() start, not create, it still uses the last user's id. So the point is dealing with the onStart() function, let the current user update.
+
+I wasted a lot of time to fix this bug, actually, it is just too simple. Next time, I have to be careful with all the activities and all the states.
+
 * Demo
 <2018-11-12 Mon 17:50>
 
