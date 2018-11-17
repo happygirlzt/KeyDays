@@ -19,8 +19,6 @@ public class TestActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseUser user;
 
-    private FirebaseAuth.AuthStateListener authStateListener;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,14 +59,11 @@ public class TestActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseAuth.getInstance().addAuthStateListener(authStateListener);
+        user = auth.getCurrentUser();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if (authStateListener != null) {
-            FirebaseAuth.getInstance().removeAuthStateListener(authStateListener);
-        }
     }
 }

@@ -7,6 +7,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="general_margin">22dp</dimen>
     <dimen name="large_margin">50dp</dimen>
+    <dimen name="general_font">18sp</dimen>
     <dimen name="large_font">22sp</dimen>
     <dimen name="narrow_margin">12dp</dimen>
     <dimen name="veryLargeFont">60sp</dimen>

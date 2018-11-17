@@ -94,6 +94,20 @@ public class ProfileActivity extends AppCompatActivity
  //       database.addChildEventListener(new DateChildEventListener());
 
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(view.getContext(), DetailActivity.class);
+
+                intent.putExtra("detail_title", dateList.get(position).getTitle());
+                intent.putExtra("detail_date", dateList.get(position).getmDate());
+
+
+                startActivity(intent);
+            }
+        });
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

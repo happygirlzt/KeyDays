@@ -19,4 +19,5 @@
     <string name="log_out">Log Out</string>
     <string name="to_profile">To Profile</string>
     <string name="loginPromp">Please Log in!</string>
+    <string name="datail_days">days</string>
 </resources>

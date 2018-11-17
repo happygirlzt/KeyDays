@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#7B68EE"
+    tools:context=".DetailActivity">
+
+
+    <Toolbar
+        android:id="@+id/datedetail_toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:titleTextColor="@android:color/white"
+        android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar"
+        android:background="@color/colorPrimary">
+    </Toolbar>
+
+    <android.support.v7.widget.CardView
+        android:background="#48D1CC"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        card_view:cardCornerRadius="12dp"
+        card_view:cardElevation="12dp"
+        card_view:cardPreventCornerOverlap="false"
+        card_view:contentPadding="0dp"
+        android:layout_width="280dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginTop="@dimen/large_margin"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/detail_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/dancing_script"
+                android:textColor="#DEB887"
+                android:textSize="@dimen/large_font"
+                android:textAlignment="center"
+                />
+
+            <TextView
+                android:id="@+id/detail_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_gravity="center"
+                android:fontFamily="@font/dancing_script"
+                android:textSize="@dimen/large_font"
+                android:textAlignment="center"
+                 />
+
+            <TextView
+                android:id="@+id/detail_days"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_gravity="center"
+                android:fontFamily="@font/dancing_script"
+                android:textSize="@dimen/large_font"
+                android:textAlignment="center"
+                />
+
+            <TextView
+                android:id="@+id/detail_suffix"
+                android:textSize="@dimen/veryLargeFont"
+                android:layout_width="match_parent"
+                android:textColor="@android:color/black"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:fontFamily="@font/dancing_script"
+                android:textSize="@dimen/large_font"
+                android:textAlignment="center"
+                android:text="@string/datail_days"
+                />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>
