@@ -16,6 +16,75 @@ I wasted a lot of time to fix this bug, actually, it is just too simple. Next ti
 [[https://github.com/happygirlzt/blog-img/blob/master/final.gif]]
 
 
+* Main Doc
+#+TITLE: Document of KeyDays
+#+AUTHOR: ZHANG TING G1801495J
+#+DATE: <2018-11-16 Fri>
+* Introduction
+KeyDays is an Android application, which enables user register and sign in to record his key dates.
+
+* Features
+** Authentication
+This APP uses Firebase to authenticate users. Users can choose to register with their emails and password, or sign in with their Google accounts.
+
+** Store data in real-time
+This APP uses Firebase as a real-time database. Users can see their recorded data anytime at any device, as all of their data is stored in Firebase. Each user can only see their own data and change their own data.
+
+** ListView to display
+This APP uses ListView to demonstrate the dates the user record. So, I defined my own object: DateItem to store the date and defined a adapter to show the dates.
+** Show the detail of the date
+When you click the date, it will start another activity to show the details of this date.
+** Add and delete dates
+Adding a date can be triggered by click the floating fab button and then AddDateActivity is created. Then the user can enter the date he wants to record.
+
+Deleting a date is implemented by long-clicking the item of the ListView.
+** Customized UI
+I customized all of the button by defining a drawable file and a style. I also changed the primary color to purple.
+
+The dates have past are marked as red, while the dates haven't arrvied are marked as green.
+* Activities
+There are Six activities in this application:
+1. LoginAcitivity: This is the start activity. When there is no current user, user can log in; if the user has no account, it can start RegisterActivity; if there is a current user, TestActivity is created. When the user signs in, a ProfileActivity will be created.
+2. RegisterActivity: User can register an account. When the user finishes register, a ProfileActivity will be started.
+3. AddDateActivity: This activity is created when the user clicks the floating fab button.
+4. ProfileActivity: There is a menu and all the dates the user records. User can log out by clicking the log out button in the menu.
+5. TestActivity: This activity is used to record user's logged in state. When the APP is closed, next time the user log in, the TestActivity will be created as a portal.
+6. DetailActivity: This activity shows the details of the date and uses various color.
+* Storage
+As mentioned before, this APP uses Firebase as the backend storage method. All the data is stored in the cloud.
+* UI
+Buttons are customized and I added the toobar in each activity to keep the consistent style. I also add progressBar to demonstrate the progress.
+* The knowledege I used
+** Activities
+*** Activity Lifecycle
+At first, I forgot to handle the onStart() on the activity AddDateActivity(), so every time, I log out and log in again, the date I record is still added to the former user. I thought it was Firebase's bug, and worked on it for several days. Finally, I figured out it was due to the onStart() part. I have to update the current user every time I try to add a new date.
+
+When I logged out, I should to close all the previous activities. So I should use
+#+BEGIN_SRC
+Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+
+// clear the previous activities
+intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+startActivity(intent);
+#+END_SRC
+
+*** Intents
+**** Put extras to next activity
+When I click on the item on the ListView, I should pass the the value of the current item to the DetailActivity() in order to demonstrate the details.
+
+** Event Handing
+*** ListView
+I used onClickListener() and onLongClickListener() in this application.
+*** Firebase
+I also use ValueEventListner() to listen the delete and add event in the database.
+
+*** Button
+onClickListener()
+
+** Menu
+Use menu part to log out and see the welcome message.
+
 * Introduction
 This Android application enables user to register and login to keep their important dates tracked. It can be seen as a date countdown, you can see how many days have past or how many days are left before that date.
 
@@ -94,11 +163,11 @@ CREATE TABLE keydate (
 *** Database
 <2018-10-19 Fri 16:33>
 
-重构数据库...
-三张表比较科学
+Refactor the databse...
+I think three tables are more sensible.
 
 1. user
-这张表用来记录用户信息
+This table is used to record the user's information. 这张表用来记录用户信息
 | id | email | first_name | last_name | password |
 |----+-------+------------+-----------+----------|
 |    |       |            |           |          |
@@ -106,14 +175,14 @@ CREATE TABLE keydate (
 | id | title | date |
 |----+-------+------|
 |    |       |      |
-这张表用来记录所有的日期
+This table is used to record all the dates. 这张表用来记录所有的日期
 3. users_keydates
-这张表用来记录哪个用户存了哪个日期
+This table is used to record which user record which date. 这张表用来记录哪个用户存了哪个日期
 | user_id | keydate_id |
 |---------+------------|
 |         |            |
 
-注意一点，column name和table name是case-sensitive
+Pay attention that column name and table name are case-sensitive.
 * 开发笔记
 ** MVC架构
 - Model: models里相关的java文件
