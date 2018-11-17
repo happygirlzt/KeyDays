@@ -13,7 +13,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/narrow_margin"
-        android:textColor="@color/colorSuffix"
         android:fontFamily="@font/copse"
         tools:text="Already 18" />
 

@@ -1,6 +1,7 @@
 package com.happygirlzt.keydays;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,9 +81,11 @@ public class DateAdaper extends BaseAdapter {
         if (days >= 0) {
             String str = "Already " + days;
             tvPastComing.setText(str);
+            tvPastComing.setTextColor(Color.rgb(220,20,60));
         } else {
             String str = "Arrives in " + Math.abs(days);
             tvPastComing.setText(str);
+            tvPastComing.setTextColor(Color.rgb(46,139,87));
         }
 
         // returns the view for the current row

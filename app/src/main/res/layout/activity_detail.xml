@@ -19,7 +19,6 @@
     </Toolbar>
 
     <android.support.v7.widget.CardView
-        android:background="#48D1CC"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         card_view:cardCornerRadius="12dp"
         card_view:cardElevation="12dp"
@@ -27,13 +26,15 @@
         card_view:contentPadding="0dp"
         android:layout_width="280dp"
         android:layout_height="200dp"
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:layout_marginTop="@dimen/large_margin"
+        android:layout_gravity="center"
+        android:layout_marginTop="130dp"
+        android:layout_marginBottom="120dp"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
             <TextView
@@ -41,33 +42,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/dancing_script"
-                android:textColor="#DEB887"
-                android:textSize="@dimen/large_font"
                 android:textAlignment="center"
-                />
+                android:textColor="#FFA500"
+                android:textSize="@dimen/large_font" />
 
             <TextView
                 android:id="@+id/detail_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryDark"
                 android:layout_gravity="center"
-                android:fontFamily="@font/dancing_script"
-                android:textSize="@dimen/large_font"
+                android:fontFamily="@font/source_code_pro_bold"
                 android:textAlignment="center"
-                 />
+                android:textColor="#4682B4"
+                android:textSize="@dimen/large_font" />
 
             <TextView
                 android:id="@+id/detail_days"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryDark"
                 android:layout_gravity="center"
-                android:fontFamily="@font/dancing_script"
-                android:textSize="@dimen/large_font"
+                android:fontFamily="@font/bree_serif"
                 android:textAlignment="center"
-                />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/large_font" />
 
             <TextView
                 android:id="@+id/detail_suffix"
@@ -82,12 +79,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/colorPrimaryDark"
-                android:fontFamily="@font/dancing_script"
-                android:textSize="@dimen/large_font"
-                android:textAlignment="center"
+                android:fontFamily="@font/bree_serif"
                 android:text="@string/datail_days"
-                />
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/large_font" />
 
         </LinearLayout>
     </android.support.v7.widget.CardView>

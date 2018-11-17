@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/bree_serif</item>
         <item>@font/copse</item>
         <item>@font/dancing_script</item>
         <item>@font/delius_swash_caps</item>
         <item>@font/peralta</item>
+        <item>@font/source_code_pro_bold</item>
     </array>
 </resources>

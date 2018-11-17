@@ -1,6 +1,7 @@
 package com.happygirlzt.keydays;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -53,10 +54,12 @@ public class DetailActivity extends AppCompatActivity {
             String str = "has past ";
             tv_suf.setText(Long.toString(days));
             tv_days.setText(str);
+            tv_suf.setTextColor(Color.rgb(220,20,60));
         } else {
             String str = "will arrive in ";
             tv_suf.setText(Long.toString(Math.abs(days)));
             tv_days.setText(str);
+            tv_suf.setTextColor(Color.rgb(46,139,87));
         }
     }
 }
