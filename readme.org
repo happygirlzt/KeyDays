@@ -10,11 +10,6 @@ I wasted a lot of time to fix this bug, actually, it is just too simple. Next ti
 * Demo
 <2018-11-12 Mon 17:50>
 
-#+CAPTION: Weight space
-#+ATTR_HTML: :alt neural network :title Neural network representation :align right
-#+ATTR_HTML: :width 50% :height 50%
-[[https://github.com/happygirlzt/blog-img/blob/master/final.gif]]
-
 
 * Main Doc
 #+TITLE: Document of KeyDays
